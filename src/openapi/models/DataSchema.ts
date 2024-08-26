@@ -5,7 +5,7 @@
 import type { ErrorSchema } from './ErrorSchema';
 export type DataSchema = {
     message: string;
-    payload?: null;
+    payload?: (Record<string, any> | null);
     error?: (ErrorSchema | null);
 };
 

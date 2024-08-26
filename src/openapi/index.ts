@@ -8,9 +8,14 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { ApiResponseSchema } from './models/ApiResponseSchema';
+export type { ChangePasswordSchema } from './models/ChangePasswordSchema';
 export type { DataSchema } from './models/DataSchema';
+export type { EmailVerificationSchema } from './models/EmailVerificationSchema';
 export type { ErrorSchema } from './models/ErrorSchema';
+export type { PasswordResetConfirmSchema } from './models/PasswordResetConfirmSchema';
+export type { PasswordResetRequestSchema } from './models/PasswordResetRequestSchema';
 export type { Schema } from './models/Schema';
+export type { SignInSchema } from './models/SignInSchema';
 export type { TokenObtainPairInputSchema } from './models/TokenObtainPairInputSchema';
 export type { TokenObtainPairOutputSchema } from './models/TokenObtainPairOutputSchema';
 export type { TokenRefreshInputSchema } from './models/TokenRefreshInputSchema';
@@ -18,5 +23,6 @@ export type { TokenRefreshOutputSchema } from './models/TokenRefreshOutputSchema
 export type { TokenVerifyInputSchema } from './models/TokenVerifyInputSchema';
 export type { UserSchema } from './models/UserSchema';
 
+export { AuthService } from './services/AuthService';
 export { TokenService } from './services/TokenService';
 export { UsersService } from './services/UsersService';
