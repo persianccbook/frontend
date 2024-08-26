@@ -11,6 +11,10 @@
     "openapi": "openapi --input http://127.0.0.1:8000/api/v1/openapi.json --output ./src/openapi --client axios"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
     "axios": "^1.7.5",
     "openapi-typescript-codegen": "^0.29.0",
     "react": "^18.3.1",

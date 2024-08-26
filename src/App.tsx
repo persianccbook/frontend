@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./App.css";
 import useAuthStore from "./store/authStore"; // Adjust the import path accordingly
 import type { TokenObtainPairInputSchema } from "./openapi"; // Adjust the import path accordingly
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 function App() {
   const {
@@ -31,41 +31,41 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>JWT Authentication Test!</h1>
-      <div>
-        <h2>Login</h2>
-        <input
+    <Box>
+    <Typography variant="h1">احراز هویت</Typography>
+      <Box>
+        <Typography variant="h2">ورود</Typography>
+        <TextField variant="outlined"
           type="text"
-          placeholder="Email"
+          placeholder="ایمیل"
           value={credentials.email}
           onChange={(e) =>
             setCredentials({ ...credentials, email: e.target.value })
           }
         />
-        <input
+        <TextField variant="outlined"
           type="password"
-          placeholder="Password"
+          placeholder="رمز ورود"
           value={credentials.password}
           onChange={(e) =>
             setCredentials({ ...credentials, password: e.target.value })
           }
         />
-        <button onClick={handleLogin}>Login</button>
-      </div>
+        <Button onClick={handleLogin}>ورود</Button>
+      </Box>
 
       {isAuthenticated && (
-        <div>
-          <h2>Authenticated</h2>
-          <p>Token: {token?.access}</p>
-          <button onClick={handleRefresh}>Refresh Token</button>
-          <button onClick={handleVerify}>Verify Token</button>
-          <button onClick={logout}>Logout</button>
-        </div>
+        <Box>
+          <Typography variant="h2">احراز هویت شده</Typography>
+          <Typography variant="body1">توکن: {token?.access}</Typography>
+          <Button onClick={handleRefresh}>بروزرسانی توکن</Button>
+          <Button onClick={handleVerify}>تایید توکن</Button>
+          <Button onClick={logout}>خروج</Button>
+        </Box>
       )}
 
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
-    </div>
+      {error && <Typography variant="body2" style={{ color: "red" }}>خطا: {error}</Typography>}
+    </Box>
   );
 }
 
