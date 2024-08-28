@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAuthStore from "./store/authStore"; // Adjust the import path accordingly
 import type { TokenObtainPairInputSchema } from "./openapi"; // Adjust the import path accordingly
 import { Box, Button, TextField, Typography } from "@mui/material";
+import ColorModeSwitch from "./components/ColorModeSwitch"; 
 
 function App() {
   const {
@@ -32,10 +33,12 @@ function App() {
 
   return (
     <Box>
-    <Typography variant="h1">احراز هویت</Typography>
+      <ColorModeSwitch />
+      <Typography variant="h1">احراز هویت</Typography>
       <Box>
         <Typography variant="h2">ورود</Typography>
-        <TextField variant="outlined"
+        <TextField
+          variant="outlined"
           type="text"
           placeholder="ایمیل"
           value={credentials.email}
@@ -43,7 +46,8 @@ function App() {
             setCredentials({ ...credentials, email: e.target.value })
           }
         />
-        <TextField variant="outlined"
+        <TextField
+          variant="outlined"
           type="password"
           placeholder="رمز ورود"
           value={credentials.password}
@@ -51,20 +55,24 @@ function App() {
             setCredentials({ ...credentials, password: e.target.value })
           }
         />
-        <Button onClick={handleLogin}>ورود</Button>
+        <Button variant="contained" onClick={handleLogin} color="primary">ورود</Button>
       </Box>
 
       {isAuthenticated && (
         <Box>
           <Typography variant="h2">احراز هویت شده</Typography>
           <Typography variant="body1">توکن: {token?.access}</Typography>
-          <Button onClick={handleRefresh}>بروزرسانی توکن</Button>
-          <Button onClick={handleVerify}>تایید توکن</Button>
-          <Button onClick={logout}>خروج</Button>
+          <Button variant="contained" onClick={handleRefresh}>بروزرسانی توکن</Button>
+          <Button variant="contained" onClick={handleVerify}>تایید توکن</Button>
+          <Button variant="contained" onClick={logout}>خروج</Button>
         </Box>
       )}
 
-      {error && <Typography variant="body2" style={{ color: "red" }}>خطا: {error}</Typography>}
+      {error && (
+        <Typography variant="body2" style={{ color: "red" }}>
+          خطا: {error}
+        </Typography>
+      )}
     </Box>
   );
 }
