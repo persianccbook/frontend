@@ -1,7 +1,7 @@
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { Button, ThemeProvider } from "@mui/material";
 import { ReactNode } from "react";
-import { darktheme, lighttheme } from "../theme";
+import { darkTheme, lighttheme } from "../theme";
 import useThemeStore from "../store/themeStore";
 
 interface PaletteProps {
@@ -31,7 +31,7 @@ export default ColorModeSwitch;
 export function Palette({ children }: PaletteProps) {
   const { mode } = useThemeStore();
 
-  const theme = mode === "dark" ? darktheme : lighttheme;
+  const theme = mode === "dark" ? darkTheme : lighttheme;
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

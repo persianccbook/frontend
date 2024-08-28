@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import useThemeStore from "../store/themeStore";
-import { darktheme, lighttheme } from "../theme";
-import {ThemeProvider } from "@mui/material";
+import { darkTheme, lighttheme } from "../theme";
+import { ThemeProvider } from "@mui/material";
 
 interface PaletteProps {
   children: ReactNode;
@@ -10,9 +10,7 @@ interface PaletteProps {
 export function Palette({ children }: PaletteProps) {
   const { mode } = useThemeStore();
 
-  const theme = mode === "dark" ? darktheme : lighttheme;
+  const theme = mode === "dark" ? darkTheme : lighttheme;
 
-  return (
-    <ThemeProvider theme={theme}>{children}</ThemeProvider>
-  )
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }

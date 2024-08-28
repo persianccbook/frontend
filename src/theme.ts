@@ -1,8 +1,13 @@
 import { createTheme } from "@mui/material";
 import { red } from "@mui/material/colors";
 
-export const lighttheme = createTheme({
+const baseTheme = createTheme({
   direction: "rtl",
+  spacing: 2,
+});
+
+export const lighttheme = createTheme({
+  ...baseTheme,
   palette: {
     mode: "light",
     primary: {
@@ -11,11 +16,10 @@ export const lighttheme = createTheme({
       dark: red[900],
     },
   },
-  spacing: 2,
 });
 
-export const darktheme = createTheme({
-  direction: "rtl",
+export const darkTheme = createTheme({
+  ...baseTheme,
   palette: {
     mode: "dark",
     primary: {
@@ -24,5 +28,4 @@ export const darktheme = createTheme({
       dark: red[900],
     },
   },
-  spacing: 2,
 });
