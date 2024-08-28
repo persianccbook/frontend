@@ -1,13 +1,10 @@
-import create from "zustand";
+import {create} from "zustand";
 import { TokenService } from "../openapi";
-import { AuthService } from "../openapi";
 import type {
   TokenObtainPairInputSchema,
   TokenObtainPairOutputSchema,
   TokenRefreshOutputSchema,
-  ApiResponseSchema,
 } from "../openapi";
-import axios from "axios";
 
 interface AuthState {
   token: TokenObtainPairOutputSchema | TokenRefreshOutputSchema | null;
