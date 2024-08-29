@@ -2,7 +2,7 @@ import { useState } from "react";
 import useAuthStore from "./store/authStore"; // Adjust the import path accordingly
 import type { TokenObtainPairInputSchema } from "./openapi"; // Adjust the import path accordingly
 import { Box, Button, TextField, Typography } from "@mui/material";
-import ColorModeSwitch from "./components/ColorModeSwitch"; 
+import ColorModeSwitch from "./components/ColorModeSwitch";
 
 function App() {
   const {
@@ -38,6 +38,7 @@ function App() {
       <Box>
         <Typography variant="h2">ورود</Typography>
         <TextField
+          sx={{ mx: 2 }}
           variant="outlined"
           type="text"
           placeholder="ایمیل"
@@ -47,6 +48,7 @@ function App() {
           }
         />
         <TextField
+          sx={{ mx: 2 }}
           variant="outlined"
           type="password"
           placeholder="رمز ورود"
@@ -55,16 +57,39 @@ function App() {
             setCredentials({ ...credentials, password: e.target.value })
           }
         />
-        <Button variant="contained" onClick={handleLogin} color="primary">ورود</Button>
+        <Button
+          variant="contained"
+          sx={{ mx: 2 }}
+          onClick={handleLogin}
+          color="primary"
+        >
+          ورود
+        </Button>
       </Box>
 
       {isAuthenticated && (
         <Box>
           <Typography variant="h2">احراز هویت شده</Typography>
           <Typography variant="body1">توکن: {token?.access}</Typography>
-          <Button variant="contained" onClick={handleRefresh}>بروزرسانی توکن</Button>
-          <Button variant="contained" onClick={handleVerify}>تایید توکن</Button>
-          <Button variant="contained" onClick={logout}>خروج</Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ mx: 2 }}
+            onClick={handleRefresh}
+          >
+            بروزرسانی توکن
+          </Button>
+          <Button variant="contained" sx={{ mx: 2 }} onClick={handleVerify}>
+            تایید توکن
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ mx: 2 }}
+            onClick={logout}
+          >
+            خروج
+          </Button>
         </Box>
       )}
 
