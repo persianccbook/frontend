@@ -13,7 +13,3 @@
   src: url("./fonts/Vazir-Code.woff2") format("woff2");
   font-weight: normal;
 }
-
-* {
-  font-family: 'VazirMatn' !important; 
-}
