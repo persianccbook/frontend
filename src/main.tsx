@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
 import "./index.css";
+import App from "./App.tsx";
 import { OpenAPI } from "./openapi/index.ts";
 import { CssBaseline } from "@mui/material";
 // import { theme, colorMode } from "./theme.ts";
