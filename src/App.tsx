@@ -1,105 +1,44 @@
-import { useState } from "react";
-import useAuthStore from "./store/authStore"; // Adjust the import path accordingly
-import type { TokenObtainPairInputSchema } from "./openapi"; // Adjust the import path accordingly
-import { Box, Button, TextField, Typography } from "@mui/material";
-import ColorModeSwitch from "./components/ColorModeSwitch";
+import { Grid, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
 
-function App() {
-  const {
-    obtainToken,
-    refreshToken,
-    verifyToken,
-    token,
-    isAuthenticated,
-    error,
-    logout,
-  } = useAuthStore();
-  const [credentials, setCredentials] = useState<TokenObtainPairInputSchema>({
-    email: "",
-    password: "",
-  });
+const App = () => {
+  const theme = useTheme();
+  const isLgUp = useMediaQuery(theme.breakpoints.up('md'));
 
-  const handleLogin = async () => {
-    await obtainToken(credentials);
-  };
-
-  const handleRefresh = async () => {
-    await refreshToken();
-  };
-
-  const handleVerify = async () => {
-    await verifyToken();
-  };
 
   return (
-    <Box>
-      <ColorModeSwitch />
-      <Typography variant="h1">احراز هویت</Typography>
-      <Box>
-        <Typography variant="h2">ورود</Typography>
-        <TextField
-          sx={{ mx: 2 }}
-          variant="outlined"
-          type="text"
-          placeholder="ایمیل"
-          value={credentials.email}
-          onChange={(e) =>
-            setCredentials({ ...credentials, email: e.target.value })
-          }
-        />
-        <TextField
-          sx={{ mx: 2 }}
-          variant="outlined"
-          type="password"
-          placeholder="رمز ورود"
-          value={credentials.password}
-          onChange={(e) =>
-            setCredentials({ ...credentials, password: e.target.value })
-          }
-        />
-        <Button
-          variant="contained"
-          sx={{ mx: 2 }}
-          onClick={handleLogin}
-          color="primary"
-        >
-          ورود
-        </Button>
-      </Box>
-
-      {isAuthenticated && (
-        <Box>
-          <Typography variant="h2">احراز هویت شده</Typography>
-          <Typography variant="body1">توکن: {token?.access}</Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{ mx: 2 }}
-            onClick={handleRefresh}
-          >
-            بروزرسانی توکن
-          </Button>
-          <Button variant="contained" sx={{ mx: 2 }} onClick={handleVerify}>
-            تایید توکن
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{ mx: 2 }}
-            onClick={logout}
-          >
-            خروج
-          </Button>
-        </Box>
-      )}
-
-      {error && (
-        <Typography variant="body2" style={{ color: "red" }}>
-          خطا: {error}
-        </Typography>
-      )}
-    </Box>
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        display: 'grid',
+        gridTemplateAreas: isLgUp
+          ? `"nav nav" "aside main" "footer footer"`
+          : `"nav" "main" "footer"`,
+        gridTemplateColumns: isLgUp ? '300px 1fr' : '1fr',
+      }}
+    >
+      <Grid item gridArea="nav">
+        <Paper>
+          <Typography variant="h1">Navbar</Typography>
+        </Paper>
+      </Grid>
+      <Grid item gridArea="main">
+        <Paper>
+          <Typography variant="h1">Main</Typography>
+        </Paper>
+      </Grid>
+      {isLgUp && (<Grid item gridArea="aside">
+        <Paper>
+          <Typography variant="h1">Aside</Typography>
+        </Paper>
+      </Grid>)}
+      <Grid item gridArea="footer">
+        <Paper>
+          <Typography variant="h1">Footer</Typography>
+        </Paper>
+      </Grid>
+    </Grid>
   );
-}
+};
 
 export default App;
