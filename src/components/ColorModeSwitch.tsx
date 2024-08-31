@@ -28,10 +28,3 @@ const ColorModeSwitch = () => {
 
 export default ColorModeSwitch;
 
-export function Palette({ children }: PaletteProps) {
-  const { mode } = useThemeStore();
-
-  const theme = mode === "dark" ? darkTheme : lighttheme;
-
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
