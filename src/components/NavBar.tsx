@@ -16,6 +16,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ColorModeSwitch from "./ColorModeSwitch";
+import useThemeStore from "../store/themeStore";
+import { darkTheme, lightTheme } from "../theme";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,6 +64,9 @@ const NavBar = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const { mode } = useThemeStore();
+  const theme = mode === "dark" ? darkTheme : lightTheme;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -145,7 +150,7 @@ const NavBar = () => {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
         >
-          <AccountCircle />
+          <AccountCircle sx={{ color: theme.palette.text.primary }}/>
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -185,13 +190,13 @@ const NavBar = () => {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <ColorModeSwitch />
             <IconButton size="large" aria-label="show 4 new mails">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+              <Badge badgeContent={4} color="secondary">
+                <MailIcon sx={{color:theme.palette.text.primary}}/>
               </Badge>
             </IconButton>
             <IconButton size="large" aria-label="show 17 new notifications">
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={17} color="secondary">
+                <NotificationsIcon sx={{color:theme.palette.text.primary}}/>
               </Badge>
             </IconButton>
             <IconButton
@@ -202,7 +207,7 @@ const NavBar = () => {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
             >
-              <AccountCircle />
+              <AccountCircle sx={{color:theme.palette.text.primary}}/>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

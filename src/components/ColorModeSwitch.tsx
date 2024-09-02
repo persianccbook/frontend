@@ -1,7 +1,7 @@
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { Button, ThemeProvider } from "@mui/material";
 import { ReactNode } from "react";
-import { darkTheme, lighttheme } from "../theme";
+import { darkTheme, lightTheme } from "../theme";
 import useThemeStore from "../store/themeStore";
 
 interface PaletteProps {
@@ -10,6 +10,7 @@ interface PaletteProps {
 
 const ColorModeSwitch = () => {
   const { mode, toggleMode } = useThemeStore();
+  const theme = mode === "dark" ? darkTheme : lightTheme;
   // const { mode, setMode } = useColorScheme();
   // if (!mode) {
   //   return null;
@@ -21,10 +22,13 @@ const ColorModeSwitch = () => {
 
   return (
     <Button onClick={toggleMode}>
-      {mode !== "dark" ? <DarkMode /> : <LightMode />}
+      {mode !== "dark" ? (
+        <DarkMode sx={{ color: theme.palette.text.primary }} />
+      ) : (
+        <LightMode sx={{ color: theme.palette.text.primary }} />
+      )}
     </Button>
   );
 };
 
 export default ColorModeSwitch;
-

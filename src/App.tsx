@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 const App = () => {
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up('md'));
-
+  
 
   return (
     <Grid

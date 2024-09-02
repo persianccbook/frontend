@@ -9,7 +9,7 @@ const baseTheme = createTheme({
   },
 });
 
-export const lighttheme = createTheme({
+export const lightTheme = createTheme({
   ...baseTheme,
   palette: {
     mode: "light",
@@ -23,7 +23,7 @@ export const lighttheme = createTheme({
     },
     background: {
       default: teal[50],
-      paper: teal[50]
+      paper: teal[50],
     },
     text: {
       primary: teal[900],
@@ -46,7 +46,7 @@ export const darkTheme = createTheme({
     },
     background: {
       default: teal[900],
-      paper: teal[900]
+      paper: teal[900],
     },
     text: {
       primary: teal[50],
