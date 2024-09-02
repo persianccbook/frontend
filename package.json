@@ -8,7 +8,7 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint .",
-    "openapi": "openapi --input http://127.0.0.1:8000/api/v1/openapi.json --output ./src/openapi --client axios"
+    "openapi": "openapi --input http://127.0.0.1:8000/api/v1/openapi.json --output ./openapi --client axios"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",

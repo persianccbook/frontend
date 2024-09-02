@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -16,8 +17,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ColorModeSwitch from "./ColorModeSwitch";
-import useThemeStore from "../store/themeStore";
 import { darkTheme, lightTheme } from "../theme";
+import useThemeStore from "../../store/themeStore";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -150,7 +151,7 @@ const NavBar = () => {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
         >
-          <AccountCircle sx={{ color: theme.palette.text.primary }}/>
+          <AccountCircle sx={{ color: theme.palette.text.primary }} />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -191,12 +192,12 @@ const NavBar = () => {
             <ColorModeSwitch />
             <IconButton size="large" aria-label="show 4 new mails">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon sx={{color:theme.palette.text.primary}}/>
+                <MailIcon sx={{ color: theme.palette.text.primary }} />
               </Badge>
             </IconButton>
             <IconButton size="large" aria-label="show 17 new notifications">
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon sx={{color:theme.palette.text.primary}}/>
+                <NotificationsIcon sx={{ color: theme.palette.text.primary }} />
               </Badge>
             </IconButton>
             <IconButton
@@ -207,7 +208,7 @@ const NavBar = () => {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
             >
-              <AccountCircle sx={{color:theme.palette.text.primary}}/>
+              <AccountCircle sx={{ color: theme.palette.text.primary }} />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

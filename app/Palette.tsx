@@ -1,7 +1,8 @@
+"use client";
 import { ReactNode } from "react";
-import useThemeStore from "../store/themeStore";
-import { darkTheme, lightTheme } from "../theme";
+import { darkTheme, lightTheme } from "./theme";
 import { ThemeProvider } from "@mui/material";
+import useThemeStore from "../store/themeStore";
 
 interface PaletteProps {
   children: ReactNode;
