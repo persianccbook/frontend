@@ -56,7 +56,7 @@ const LoginPage = () => {
         <Typography variant="h3" sx={{ mb: 15 }}>
           ورود
         </Typography>
-        {apiError && <p>{apiError}</p>}
+        {apiError && <Typography variant="caption" color="error">ایمیل یا گذرواژه وارد شده اشتباه است.</Typography>}
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl sx={{ minWidth: 290 }}>
             <FormLabel sx={{ mb: 3 }}>ایمیل:</FormLabel>
