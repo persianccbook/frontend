@@ -5,6 +5,7 @@ import GoogleAnalyticsScript from "./GoogleAnalyticsScript";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
+
 export const metadata: Metadata = {
   title: "PersianCCBook",
   description: "CC Books",

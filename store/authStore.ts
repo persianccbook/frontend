@@ -1,11 +1,13 @@
 import { create } from "zustand";
-import { TokenService } from "../openapi";
+import { OpenAPI, TokenService } from "../openapi";
 import type {
   TokenObtainPairInputSchema,
   TokenObtainPairOutputSchema,
   TokenRefreshOutputSchema,
 } from "../openapi";
 import { persist, createJSONStorage } from "zustand/middleware";
+
+OpenAPI.BASE = 'http://127.0.0.1:8000'
 
 interface AuthState {
   token: TokenObtainPairOutputSchema | TokenRefreshOutputSchema | null;

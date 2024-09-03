@@ -1,6 +1,7 @@
 "use client";
 import { createTheme } from "@mui/material";
 import { coral, teal } from "./colors";
+import { grey } from "@mui/material/colors";
 
 const baseTheme = createTheme({
   direction: "rtl",
