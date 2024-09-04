@@ -13,7 +13,7 @@ const AuthLayout = ({children}:Props) => {
       alignContent="center"
       marginBottom={3}
     >
-      <Paper sx={{ m: 5, p: 10, minWidth: 300, borderRadius: 5 }}>
+      <Paper elevation={10} sx={{ m: 5, p: 10, minWidth: 300, borderRadius: 5 }}>
         {children}
       </Paper>
     </Box>
