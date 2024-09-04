@@ -51,7 +51,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Typography variant="h3" sx={{ mb: 15 }}>
+      <Typography variant="h4" sx={{ mb: 15 }}>
         ورود
       </Typography>
       {apiError && (
