@@ -19,6 +19,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import ColorModeSwitch from "./ColorModeSwitch";
 import { darkTheme, lightTheme } from "../theme";
 import useThemeStore from "../../store/themeStore";
+import { usePathname } from "next/navigation";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+  const pathName = usePathname();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -178,15 +180,17 @@ const NavBar = () => {
           >
             PersianCCBook
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="جستجو..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          {pathName === "/" && (
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="جستجو..."
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          )}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <ColorModeSwitch />
