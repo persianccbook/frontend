@@ -140,7 +140,7 @@ const LoginPage = () => {
             }}
           >
             <Typography variant="caption">حساب کاربری ندارید؟</Typography>
-            <NextLink href="/" passHref>
+            <NextLink href="/auth/register" passHref>
               <Link component="button" variant="caption" underline="none">
                 ثبت نام کنید
               </Link>
