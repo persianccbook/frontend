@@ -83,7 +83,7 @@ const LoginPage = () => {
             }}
           >
             <Typography>گذرواژه:</Typography>
-            <NextLink href="/profile/reset-password" passHref>
+            <NextLink href="/auth/reset-password" passHref>
               <Link component="button" variant="caption" underline="none">
                 گذرواژه خود را فراموش کرده اید؟
               </Link>
