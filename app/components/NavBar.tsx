@@ -19,7 +19,9 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import ColorModeSwitch from "./ColorModeSwitch";
 import { darkTheme, lightTheme } from "../theme";
 import useThemeStore from "../../store/themeStore";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import useAuthStore from "../../store/authStore";
+import { Login, Logout } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,6 +65,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+  const router = useRouter();
+  const { isAuthenticated, logout } = useAuthStore();
   const pathName = usePathname();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -110,6 +114,16 @@ const NavBar = () => {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {isAuthenticated && (
+        <MenuItem
+          onClick={() => {
+            logout();
+            handleMenuClose();
+          }}
+        >
+          Logout
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -146,17 +160,44 @@ const NavBar = () => {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem
+        onClick={
+          isAuthenticated
+            ? handleProfileMenuOpen
+            : () => router.push("/auth/login")
+        }
+      >
         <IconButton
           size="large"
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
         >
-          <AccountCircle sx={{ color: theme.palette.text.primary }} />
+          {isAuthenticated ? (
+            <AccountCircle sx={{ color: theme.palette.text.primary }} />
+          ) : (
+            <Login sx={{ color: theme.palette.text.primary }} />
+          )}
         </IconButton>
-        <p>Profile</p>
+        {isAuthenticated ? <p>Profile</p> : <p>Login</p>}
       </MenuItem>
+      {isAuthenticated && (
+        <MenuItem
+          onClick={() => {
+            logout();
+          }}
+        >
+          <IconButton
+            size="large"
+            // aria-label="account of current user"
+            // aria-controls="primary-search-account-menu"
+            // aria-haspopup="true"
+          >
+            <Logout sx={{ color: theme.palette.text.primary }} />
+          </IconButton>
+          <p>Logout</p>
+        </MenuItem>
+      )}
     </Menu>
   );
 
@@ -210,9 +251,17 @@ const NavBar = () => {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={
+                isAuthenticated
+                  ? handleProfileMenuOpen
+                  : () => router.push("/auth/login")
+              }
             >
-              <AccountCircle sx={{ color: theme.palette.text.primary }} />
+              {isAuthenticated ? (
+                <AccountCircle sx={{ color: theme.palette.text.primary }} />
+              ) : (
+                <Login sx={{ color: theme.palette.text.primary }} />
+              )}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
