@@ -20,6 +20,7 @@ const HomePage = () => {
         gridTemplateAreas: isMdUp ? `"aside main"` : `"main"`,
         gridTemplateColumns: isMdUp ? "300px 1fr" : "1fr",
         m: 0,
+        mb:3
       }}
     >
       <Grid item gridArea="main">
