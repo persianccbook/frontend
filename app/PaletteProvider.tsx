@@ -8,10 +8,12 @@ interface PaletteProps {
   children: ReactNode;
 }
 
-export function Palette({ children }: PaletteProps) {
+const PaletteProvider = ({ children }: PaletteProps) => {
   const { mode } = useThemeStore();
 
   const theme = mode === "dark" ? darkTheme : lightTheme;
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
+};
+
+export default PaletteProvider;

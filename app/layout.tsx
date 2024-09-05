@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { Palette } from "./Palette";
+import  PaletteProvider  from "./PaletteProvider";
 import { CssBaseline } from "@mui/material";
 import GoogleAnalyticsScript from "./GoogleAnalyticsScript";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-
 
 export const metadata: Metadata = {
   title: "PersianCCBook",
@@ -24,12 +23,12 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <GoogleAnalyticsScript />
       <body>
-        <Palette>
+        <PaletteProvider>
           <CssBaseline />
           <NavBar />
           <main id="root">{children}</main>
           <Footer />
-        </Palette>
+        </PaletteProvider>
       </body>
     </html>
   );
