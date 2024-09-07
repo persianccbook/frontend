@@ -22,6 +22,7 @@ import useThemeStore from "../../store/themeStore";
 import { usePathname, useRouter } from "next/navigation";
 import useAuthStore from "../../store/authStore";
 import { Login, Logout } from "@mui/icons-material";
+import Logo from "./logo";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -205,22 +206,26 @@ const NavBar = () => {
     <Box sx={{ flexGrow: 1, mb: 3 }}>
       <AppBar position="static" color="primary">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography
+          </IconButton> */}
+          <Logo/>
+
+          {/* <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            PersianCCBook
-          </Typography>
+            
+            
+            کتابخانه آزاد پارسی
+          </Typography> */}
           {pathName === "/" && (
             <Search>
               <SearchIconWrapper>
