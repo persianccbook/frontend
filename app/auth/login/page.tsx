@@ -12,7 +12,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import useAuthStore from "../../../store/authStore";
@@ -32,7 +32,13 @@ type FormData = z.infer<typeof schema>;
 const LoginPage = () => {
   const router = useRouter();
   const { obtainToken, isAuthenticated, error: apiError } = useAuthStore();
-  if (isAuthenticated) router.push("/");
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
+
   const handleLogin = async (credentials: FormData) => {
     await obtainToken(credentials);
   };
@@ -47,6 +53,7 @@ const LoginPage = () => {
 
   const onSubmit = (data: FormData) => {
     handleLogin(data);
+    // router.push("/");
   };
 
   return (
