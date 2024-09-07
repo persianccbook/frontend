@@ -7,7 +7,7 @@ import type {
 } from "../openapi";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-OpenAPI.BASE = 'http://127.0.0.1:8000'
+// OpenAPI.BASE = 'http://127.0.0.1:8000'
 
 interface AuthState {
   token: TokenObtainPairOutputSchema | TokenRefreshOutputSchema | null;
@@ -80,5 +80,19 @@ const useAuthStore = create(
     }
   )
 );
+
+useAuthStore.subscribe((state) => {
+  console.log(state.isAuthenticated);
+
+  OpenAPI.HEADERS = {
+    Authorization: state.isAuthenticated ? `Bearer ${state.token?.access}` : "",
+  };
+});
+
+OpenAPI.HEADERS = {
+  Authorization: useAuthStore.getState().isAuthenticated
+    ? `Bearer ${useAuthStore.getState().token?.access}`
+    : "",
+};
 
 export default useAuthStore;
