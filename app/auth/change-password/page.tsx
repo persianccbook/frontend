@@ -63,8 +63,7 @@ const ChangePasswordPage = () => {
       } as ChangePasswordSchema);
     } catch (error: any) {
       console.log(error);
-    }
-    console.log(data);
+    } 
   };
   return (
     <>
