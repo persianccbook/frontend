@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import  PaletteProvider  from "./PaletteProvider";
+import PaletteProvider from "./PaletteProvider";
+import "./globals.css";
 import { CssBaseline } from "@mui/material";
 import GoogleAnalyticsScript from "./GoogleAnalyticsScript";
 import NavBar from "./components/NavBar";
