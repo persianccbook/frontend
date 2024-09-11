@@ -1,4 +1,4 @@
-FROM oven/bun
+FROM docker.arvancloud.ir/oven/bun
 
 WORKDIR /app
 
