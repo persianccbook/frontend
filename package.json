@@ -7,7 +7,7 @@
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
-    "lint": "eslint .",
+    "lint": "next lint",
     "openapi": "openapi --input http://127.0.0.1:8000/api/v1/openapi.json --output ./openapi --client axios"
   },
   "dependencies": {
@@ -30,11 +30,12 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/node": "^22.5.1",
-    "eslint": "^9.9.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.7",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.0",
     "typescript-eslint": "^8.0.1"
   }
 }
