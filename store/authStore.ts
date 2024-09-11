@@ -6,6 +6,7 @@ import type {
   TokenRefreshOutputSchema,
 } from "../openapi";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { isAxiosError } from "axios";
 
 // OpenAPI.BASE = 'http://127.0.0.1:8000'
 
@@ -31,8 +32,12 @@ const useAuthStore = create(
         try {
           const response = await TokenService.tokenObtainPair(credentials);
           set({ token: response, isAuthenticated: true, error: null });
-        } catch (error: any) {
-          set({ error: error.message });
+        } catch (error: unknown) {
+          if (isAxiosError(error)) {
+            set({ error: error.message });
+          } else {
+            set({ error: 'An unknown error occurred' });
+          }
         }
       },
 
@@ -49,8 +54,12 @@ const useAuthStore = create(
             refresh: refreshToken,
           });
           set({ token: response, error: null });
-        } catch (error: any) {
-          set({ error: error.message });
+        } catch (error: unknown) {
+          if (isAxiosError(error)) {
+            set({ error: error.message });
+          } else {
+            set({ error: 'An unknown error occurred' });
+          }
         }
       },
 
@@ -65,8 +74,12 @@ const useAuthStore = create(
         try {
           await TokenService.tokenVerify({ token });
           set({ error: null }); // Token is valid
-        } catch (error: any) {
-          set({ error: error.message });
+        } catch (error: unknown) {
+          if (isAxiosError(error)) {
+            set({ error: error.message });
+          } else {
+            set({ error: 'An unknown error occurred' });
+          }
         }
       },
       // Method to log out

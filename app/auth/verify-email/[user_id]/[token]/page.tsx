@@ -15,7 +15,7 @@ const VerifyEmailPage = async ({ params: { user_id, token } }: Props) => {
         user_id: user_id,
         token: token,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
     }
     console.log(res);

@@ -61,7 +61,7 @@ const ResetPasswordConfirmPage = ({
         new_password: data.new_password,
         confirm_new_password: data.confirm_new_password,
       } as PasswordResetConfirmSchema);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
     }
   };

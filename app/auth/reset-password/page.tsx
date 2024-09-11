@@ -33,7 +33,7 @@ const ResetPasswordPage = () => {
       await AuthService.apiAuthApiRequestPasswordReset({
         ...data,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
     }
     console.log(data);

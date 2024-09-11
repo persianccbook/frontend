@@ -54,7 +54,7 @@ const RegisterPage = () => {
       await AuthService.apiAuthApiRegister({
         email:data.email,password:data.password
       } as SignInSchema);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
     }
     console.log(data);

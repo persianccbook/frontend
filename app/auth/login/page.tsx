@@ -37,7 +37,7 @@ const LoginPage = () => {
     if (isAuthenticated) {
       router.push("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated,router]);
 
   const handleLogin = async (credentials: FormData) => {
     await obtainToken(credentials);

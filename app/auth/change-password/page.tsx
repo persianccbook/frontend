@@ -61,7 +61,7 @@ const ChangePasswordPage = () => {
       await AuthService.apiAuthApiChangePassword({
         ...data
       } as ChangePasswordSchema);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.log(error);
     } 
   };
