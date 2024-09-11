@@ -4,16 +4,16 @@
 }
 @font-face {
   font-family: "VazirMatn";
-  src: url("./fonts/Vazirmatn-Bold.woff2") format("woff2");
+  src: url("/fonts/Vazirmatn-Bold.woff2") format("woff2");
   font-weight: bold;
 }
 @font-face {
   font-family: "VazirMatn";
-  src: url("./fonts/Vazirmatn-Regular.woff2") format("woff2");
+  src: url("/fonts/Vazirmatn-Regular.woff2") format("woff2");
   font-weight: normal;
 }
 @font-face {
   font-family: "VazirCode";
-  src: url("./fonts/Vazir-Code.woff2") format("woff2");
+  src: url("/fonts/Vazir-Code.woff2") format("woff2");
   font-weight: normal;
 }
