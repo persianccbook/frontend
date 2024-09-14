@@ -1,27 +1,16 @@
 import {
   alpha,
-  keyframes,
   Typography,
   TypographyVariant,
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { motion} from "framer-motion";
 
 interface Props {
   words: string[];
   variant: TypographyVariant;
 }
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 const WordCycle = ({ words, variant: variant }: Props) => {
   const theme = useTheme();
@@ -42,10 +31,21 @@ const WordCycle = ({ words, variant: variant }: Props) => {
 
     return () => clearInterval(intervalId);
   }, [word, words]);
+
   return (
-    <>
+    <motion.div
+      key={word}
+      style={{ display: "inline-block" }}
+      variants={{
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 1,ease:'easeIn' }}
+    >
       <Typography
-        key={word}
+        
         variant="button"
         bgcolor={alpha(colors[words.indexOf(word)], 0.2)}
         sx={{ borderRadius: 5, p: 2 }}
@@ -56,13 +56,13 @@ const WordCycle = ({ words, variant: variant }: Props) => {
           sx={{
             color: colors[words.indexOf(word)],
             fontWeight: "Bold",
-            animation: `${fadeIn} 1s`,
+            // animation: `${fadeIn} 1s`,
           }}
         >
           {word}
         </Typography>
       </Typography>
-    </>
+    </motion.div>
   );
 };
 
