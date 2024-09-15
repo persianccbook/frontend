@@ -3,13 +3,13 @@ import React from "react";
 
 const CopyRightFooter = () => {
   const currentYear = new Date().getFullYear();
-  const yourName = "علیرضا صدیقی";
+  const yourName = " علیرضا صدیقی";
   const yourLink = "";
 
   return (
     <Paper
       elevation={0}
-      sx={{ display:"flex",flexDirection:"column",alignItems:'center'}}
+      sx={{ display:"flex",flexDirection:"column",alignItems:'center',m:5}}
     >
       <Box>
         ساخته شده توسط
