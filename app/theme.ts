@@ -24,7 +24,7 @@ export const lightTheme = createTheme({
     },
     background: {
       default: teal[50],
-      paper: teal[50],
+      paper: teal[100],
     },
     text: {
       primary: teal[900],
@@ -46,7 +46,7 @@ export const darkTheme = createTheme({
       contrastText: teal[50],
     },
     background: {
-      default: teal[900],
+      default: teal[800],
       paper: teal[900],
     },
     text: {
