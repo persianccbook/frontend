@@ -4,7 +4,7 @@ import React from "react";
 const CopyRightFooter = () => {
   const currentYear = new Date().getFullYear();
   const yourName = " علیرضا صدیقی";
-  const yourLink = "";
+  const yourLink = "https://mr-arsenic.is-a.dev/";
 
   return (
     <Paper
@@ -13,7 +13,7 @@ const CopyRightFooter = () => {
     >
       <Box>
         ساخته شده توسط
-        <Link href={yourLink} underline="none" sx={{ pr: 2 }}>
+        <Link href={yourLink} target="_blank" underline="none" sx={{ color:'secondary.main',pr: 2 }}>
           {yourName}
         </Link>.
         تمامی حقوق این وبسایت متعلق به کتابخانه آزاد پارسی می‌باشد.
