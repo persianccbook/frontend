@@ -21,6 +21,7 @@ import { usePathname, useRouter } from "next/navigation";
 import useAuthStore from "../../store/authStore";
 import { Login, Logout } from "@mui/icons-material";
 import Logo from "./logo";
+import Link from "next/link";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -212,7 +213,9 @@ const NavBar = () => {
           >
             <MenuIcon />
           </IconButton> */}
-          <Logo/>
+          <Link href={"/"}>
+            <Logo />
+          </Link>
 
           {/* <Typography
             variant="h6"
