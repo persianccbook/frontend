@@ -6,15 +6,16 @@ import React from "react";
 const Transition = ({ children }: { children: React.ReactNode }) => {
   const path = usePathname();
 
+  console.log(path)
+
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="sync" initial={false }>
       <motion.div
-        key={path}
-        initial={{ scale: 0 }}
+      key={path}
+        initial={{ scale: 0 }}  
         animate={{ scale: 1 }}
-        exit={{ x: -50, opacity: 0 }}
         transition={{ duration: 0.5, ease: "easeIn" }}
-      >
+      > 
         {children}
       </motion.div>
     </AnimatePresence>
