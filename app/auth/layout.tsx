@@ -1,23 +1,12 @@
-import { Box, Paper } from "@mui/material";
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
+import FormLayout from "../components/FormLayout";
 
-interface Props { 
+interface Props {
   children: ReactNode;
 }
 
-const AuthLayout = ({children}:Props) => {
-  return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignContent="center"
-      marginBottom={3}
-    >
-      <Paper elevation={10} sx={{ m: 5, p: 10, minWidth: 300, borderRadius: 5 }}>
-        {children}
-      </Paper>
-    </Box>
-  );
+const AuthLayout = ({ children }: Props) => {
+  return <FormLayout>{children}</FormLayout>;
 };
 
 export default AuthLayout;
