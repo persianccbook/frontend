@@ -6,14 +6,11 @@ import { motion } from "framer-motion";
 
 const InfoSegment = () => {
   const initial = {
-    color:'inherit',
     borderRadius: "10px",
     paddingLeft: "5px",
     paddingRight: "5px",
   };
   const whileHover = {
-    color: "black",
-    backgroundColor: "white",
     borderRadius: "10px",
     paddingLeft: "5px",
     paddingRight: "5px",
