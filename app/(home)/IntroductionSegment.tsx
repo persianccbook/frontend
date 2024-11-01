@@ -3,6 +3,7 @@ import Image from "next/image";
 import reading from "../../public/reading.svg";
 import WordCycle from "../components/WordCycle";
 import LevitateImage from "../components/LevitateImage";
+import Link from "next/link";
 
 const IntroductionSegment = () => {
     const theme = useTheme();
@@ -61,12 +62,13 @@ const IntroductionSegment = () => {
         }}
       >
         <LevitateImage>
+          <Link href={"/books"}>
           <Image
             src={reading}
             alt="logo"
             width={isXlUp ? 800 : isLgUp ? 500 : isMdUp ? 400 : 300}
             style={{ flex: 1, padding: 5, margin: 50 }}
-          />
+          /></Link>
         </LevitateImage>
       </Box>
     </Box>
