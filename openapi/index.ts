@@ -8,10 +8,14 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { ApiResponseSchema } from './models/ApiResponseSchema';
+export type { BookSchema } from './models/BookSchema';
 export type { ChangePasswordSchema } from './models/ChangePasswordSchema';
+export type { ChapterSchema } from './models/ChapterSchema';
 export type { DataSchema } from './models/DataSchema';
 export type { EmailVerificationSchema } from './models/EmailVerificationSchema';
 export type { ErrorSchema } from './models/ErrorSchema';
+export type { GenreSchema } from './models/GenreSchema';
+export type { PageSchema } from './models/PageSchema';
 export type { PasswordResetConfirmSchema } from './models/PasswordResetConfirmSchema';
 export type { PasswordResetRequestSchema } from './models/PasswordResetRequestSchema';
 export type { Schema } from './models/Schema';
@@ -24,5 +28,6 @@ export type { TokenVerifyInputSchema } from './models/TokenVerifyInputSchema';
 export type { UserSchema } from './models/UserSchema';
 
 export { AuthService } from './services/AuthService';
+export { BooksService } from './services/BooksService';
 export { TokenService } from './services/TokenService';
 export { UsersService } from './services/UsersService';
