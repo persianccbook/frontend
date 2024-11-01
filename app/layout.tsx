@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -30,9 +30,9 @@ export default function RootLayout({
         <PaletteProvider>
           <CssBaseline />
           <NavBar />
-          <QueryClientProvider client={queryClient}>
+          {/* <QueryClientProvider client={queryClient}> */}
             <main id="root">{children}</main>
-          </QueryClientProvider>
+          {/* </QueryClientProvider> */}
           <Footer />
         </PaletteProvider>
       </body>
