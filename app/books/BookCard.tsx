@@ -3,17 +3,11 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { motion, useAnimate } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { BookSchema } from "../../openapi";
 
-interface Book {
-  title: string;
-  id: number;
-  author: string;
-  description: string;
-  coverUrl: string;
-}
 
 interface Props {
-  book: Book;
+  book: BookSchema;
 }
 
 const BookCard = ({ book }: Props) => {
@@ -88,7 +82,7 @@ const BookCard = ({ book }: Props) => {
     fourthAnimate,
   ]);
 
-  return (
+  return (  
     <motion.button
       ref={firstScope}
       style={{
@@ -119,7 +113,7 @@ const BookCard = ({ book }: Props) => {
           width: 210,
           height: 300,
           borderRadius: 3,
-          backgroundImage: `url(${book.coverUrl})`,
+          backgroundImage: `url(${book.cover_image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
@@ -154,7 +148,7 @@ const BookCard = ({ book }: Props) => {
               variant="caption"
               component="h2"
             >
-              {book.title}({book.author})
+              {book.title}({book.authors})
             </Typography>
           </Box>
         </CardContent>
