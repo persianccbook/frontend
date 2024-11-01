@@ -17,6 +17,8 @@ export type { ErrorSchema } from './models/ErrorSchema';
 export type { GenreSchema } from './models/GenreSchema';
 export type { PageSchema } from './models/PageSchema';
 export type { PaginatedBooks } from './models/PaginatedBooks';
+export type { PaginatedBooksDataSchema } from './models/PaginatedBooksDataSchema';
+export type { PaginatedBooksSchema } from './models/PaginatedBooksSchema';
 export type { PasswordResetConfirmSchema } from './models/PasswordResetConfirmSchema';
 export type { PasswordResetRequestSchema } from './models/PasswordResetRequestSchema';
 export type { Schema } from './models/Schema';

@@ -6,7 +6,7 @@ import type { BookSchema } from '../models/BookSchema';
 import type { ChapterSchema } from '../models/ChapterSchema';
 import type { GenreSchema } from '../models/GenreSchema';
 import type { PageSchema } from '../models/PageSchema';
-import type { PaginatedBooks } from '../models/PaginatedBooks';
+import type { PaginatedBooksSchema } from '../models/PaginatedBooksSchema';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -15,13 +15,13 @@ export class BooksService {
      * Get All Books
      * @param limit
      * @param offset
-     * @returns PaginatedBooks OK
+     * @returns PaginatedBooksSchema OK
      * @throws ApiError
      */
     public static apiBookApiGetAllBooks(
         limit: number = 1,
         offset?: number,
-    ): CancelablePromise<PaginatedBooks> {
+    ): CancelablePromise<PaginatedBooksSchema> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/books/get_all_books',
