@@ -1,70 +1,36 @@
 "use client";
 import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
 import DeveloperCard from "./developerCard";
 import Carousel from "../../components/Carousel";
+import { Contributor } from "../../hooks/useContributors";
 
+// TODO: read contributers from backend
 const DevelopersPage = () => {
   const page_description =
-    "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.";
-  const developers = [
+    "پروژه کتابخانه آزاد پارسی پروژه ای تماما متن باز است که توسعه آن به کمک اعضای کامیونیتی توسعه یافته و توسعه آن به همین صورت نیز ادامه خواهد داشت، هدف ما ایجاد فضایی آزاد برای دسترسی عموم به متون فرهنگی و علمی است.";
+
+  // const [contributors, setContributors] = useState([] as Contributor[]);
+  // const getContributors = useContributors();
+
+  // useEffect(() => {
+  //   getContributors.then(contributors => {
+  //     setContributors(contributors);
+  //   });
+  // }, [getContributors]);
+
+  const contributors: Contributor[] = [
     {
-      name: "علیرضا ",
-      bio: "",
+      name: "MrArsenic621",
       roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
+      avatar: "https://avatars.githubusercontent.com/u/54413417?v=4",
+      githubUrl: "https://github.com/MrArsenic621",
     },
     {
-      name: " صدیقی",
-      bio: "",
+      name: "metantesan",
       roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
+      avatar: "https://avatars.githubusercontent.com/u/94219809?v=4",
+      githubUrl: "https://github.com/metantesan",
     },
-    {
-      name: "علیرضا صدیقی",
-      bio: "",
-      roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
-    },
-    {
-      name: "علیرضا  hhthصدیقی",
-      bio: "",
-      roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
-    },
-    {
-      name: "علیرضا ",
-      bio: "",
-      roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
-    },
-    {
-      name: " صدیقی",
-      bio: "",
-      roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
-    },
-    {
-      name: "علیرضا صدیقی",
-      bio: "",
-      roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
-    },
-    {
-      name: "علیرضا  hhthصدیقی",
-      bio: "",
-      roles: ["Frontend Developer", "Backend Developer"],
-      image: "https://via.placeholder.com/150",
-      donationLink: "https://example.com/donate",
-    },
-    // Add more developers here
   ];
 
   return (
@@ -84,11 +50,16 @@ const DevelopersPage = () => {
       <Paper sx={{ p: 5, mb: 10 }}>
         <Typography variant="body1">{page_description}</Typography>
       </Paper>
-      <Carousel>
-        {developers.map((developer, index) => (
-          <DeveloperCard key={index} developer={developer} />
-        ))}
-      </Carousel>
+      <Paper elevation={3} sx={{ p: 5 }}>
+        <Typography variant="h4" sx={{ mb: 10 }}>
+          تیم ما
+        </Typography>
+        <Carousel>
+          {contributors.map((contributor, index) => (
+            <DeveloperCard key={index} contributor={contributor} />
+          ))}
+        </Carousel>
+      </Paper>
     </Box>
   );
 };

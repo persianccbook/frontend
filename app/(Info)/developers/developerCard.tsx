@@ -1,113 +1,75 @@
 import {
+  Box,
   Button,
   Card,
   CardContent,
   CardMedia,
+  Link,
   Paper,
   Typography,
 } from "@mui/material";
 import React from "react";
-
-interface Developer {
-  name: string;
-  bio: string;
-  roles: string[];
-  image: string;
-  donationLink: string;
-}
+import { Contributor } from "../../hooks/useContributors";
+import { GitHub } from "@mui/icons-material";
 
 interface Props {
-  developer: Developer;
+  contributor: Contributor;
 }
 
-const developerCard = ({ developer }: Props) => {
+const developerCard = ({ contributor }: Props) => {
   return (
     <Card
       sx={{
-        maxHeight: 345,
+        maxHeight: 310,
         maxWidth: 250,
         margin: 2,
         display: "flex",
         flexDirection: "column",
         gap: 5,
-        borderRadius:'15px'
+        borderRadius: "15px",
       }}
     >
-      <Paper elevation={10} sx={{py:10}}>
+      <Paper elevation={10} sx={{ py: 10 }}>
         <CardMedia
-          sx={{ maxHeight: 150, maxWidth: 150,borderRadius:'50%',mx:'auto' }}
+          sx={{
+            maxHeight: 150,
+            maxWidth: 150,
+            borderRadius: "50%",
+            mx: "auto",
+          }}
           component="img"
           height="150"
           width="150"
-          image={developer.image}
-          alt={developer.name}
+          image={contributor.avatar}
+          alt={contributor.name}
         />
       </Paper>
-      <CardContent sx={{p:2,pt:0,m:4,zIndex:5}}>
+      <CardContent sx={{ p: 2, pt: 0, m: 4, zIndex: 5 }}>
         <Typography variant="h6" component="div">
-          {developer.name}
+          {contributor.name}
         </Typography>
-        {developer.roles.map((role, index) => (
+        {contributor.roles.map((role, index) => (
           <Typography
             variant="caption"
             key={index}
             color="text.secondary"
             display={"inline-block"}
           >
-            {index === developer.roles.length - 1 ? role : role + ", "}
+            {index === contributor.roles.length - 1 ? role : role + ", "}
           </Typography>
         ))}
-        <Typography variant="body2" color="text.secondary">
-          {developer.bio}
-        </Typography>
-        {/* <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 16,
-          }}
-        >
-          <Link
-            href={developer.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="contained" color="primary">
-              Twitter
-            </Button>
-          </Link>
-          <Link
-            href={developer.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="contained" color="primary">
-              GitHub
-            </Button>
-          </Link>
-          <Link
-            href={developer.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="contained" color="primary">
-              LinkedIn
-            </Button>
-          </Link>
-        </div> */}
-        <div style={{ marginTop: 16 }}>
+        <Box sx={{display:'flex',justifyContent:'end'}}>
           <Button
-            variant="contained"
-            color="primary"
-            href={developer.donationLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            size="small"
-            
+            disableRipple
+            disableElevation
+            disableFocusRipple
+            disableTouchRipple
           >
-            حمایت
+            <Link href={contributor.githubUrl} target="_blank">
+              <GitHub />
+            </Link>
           </Button>
-        </div>
+        </Box>
       </CardContent>
     </Card>
   );
