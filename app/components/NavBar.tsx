@@ -6,13 +6,13 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
+// import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import MailIcon from "@mui/icons-material/Mail";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ColorModeSwitch from "./ColorModeSwitch";
 import { darkTheme, lightTheme } from "../theme";
@@ -112,8 +112,8 @@ const NavBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
       {isAuthenticated && (
         <MenuItem
           onClick={() => {
@@ -144,7 +144,7 @@ const NavBar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails">
           <Badge badgeContent={4} color="error">
             <MailIcon />
@@ -159,7 +159,7 @@ const NavBar = () => {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem
         onClick={
           isAuthenticated
@@ -227,7 +227,7 @@ const NavBar = () => {
             
             کتابخانه آزاد پارسی
           </Typography> */}
-          {pathName === "/" && (
+          {false && pathName === "/" && (
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -241,7 +241,7 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <ColorModeSwitch />
-            <IconButton size="large" aria-label="show 4 new mails">
+            {/* <IconButton size="large" aria-label="show 4 new mails">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon sx={{ color: theme.palette.text.primary }} />
               </Badge>
@@ -250,7 +250,7 @@ const NavBar = () => {
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon sx={{ color: theme.palette.text.primary }} />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
