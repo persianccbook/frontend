@@ -6,6 +6,7 @@ interface Props {
   children: ReactNode;
 }
 
+// TODO: fix mobile view
 const Carousel = ({ children }: Props) => {
   const [activeIndex, setActiveIndex] = useState(1);
 
