@@ -5,7 +5,6 @@ import { motion, useAnimate } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { BookSchema } from "../../openapi";
 
-
 interface Props {
   book: BookSchema;
 }
@@ -18,7 +17,25 @@ const BookCard = ({ book }: Props) => {
   const [thirdScope, thirdAnimate] = useAnimate();
   const [fourthScope, fourthAnimate] = useAnimate();
 
-  //TODO: seperate event listeners into a sepreate useEffect
+  useEffect(() => {
+    const handleMouseOver = () => {
+      setIsHovered(true);
+    };
+    const handleMouseOut = () => {
+      setIsHovered(false);
+    };
+
+    firstScope.current.addEventListener("mouseover", handleMouseOver);
+    firstScope.current.addEventListener("mouseout", handleMouseOut);
+
+    return () => {
+      if (firstScope.current) {
+        firstScope.current.removeEventListener("mouseover", handleMouseOver);
+        firstScope.current.removeEventListener("mouseout", handleMouseOut);
+      }
+    };
+  }, [isHovered]);
+
   useEffect(() => {
     if (isHovered) {
       firstAnimate(firstScope.current, {
@@ -55,21 +72,6 @@ const BookCard = ({ book }: Props) => {
         x: 0,
       });
     }
-
-    const handleMouseOver = () => {
-      setIsHovered(true);
-    };
-    const handleMouseOut = () => {
-      setIsHovered(false);
-    };
-
-    firstScope.current.addEventListener("mouseover", handleMouseOver);
-    firstScope.current.addEventListener("mouseout", handleMouseOut);
-
-    return () => {
-      firstScope.current.removeEventListener("mouseover", handleMouseOver);
-      firstScope.current.removeEventListener("mouseout", handleMouseOut);
-    };
   }, [
     isHovered,
     firstScope,
@@ -82,7 +84,7 @@ const BookCard = ({ book }: Props) => {
     fourthAnimate,
   ]);
 
-  return (  
+  return (
     <motion.button
       ref={firstScope}
       style={{
