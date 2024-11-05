@@ -1,4 +1,4 @@
-import { Box, Link, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import React from "react";
 
 const CopyRightFooter = () => {
