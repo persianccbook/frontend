@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
-import { ApiResponseSchema, AuthService, OpenAPI } from "../../../../../openapi";
+import { ApiResponseSchema, AuthService } from "../../../../../openapi";
 
 interface Props {
   params: { user_id: string; token: string };
