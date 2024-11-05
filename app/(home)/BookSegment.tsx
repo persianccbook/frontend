@@ -1,31 +1,28 @@
 import { Box, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import bookCoverRed from "../../public/book-cover-red.jpg";
 import bookCoverGreen from "../../public/book-cover-green.jpg";
-import bookCoverBlue from "../../public/book-cover-blue.jpg";
-import Image, { StaticImageData } from "next/image";
 import { useAnimate } from "framer-motion";
 import useInterval from "../hooks/useInterval";
+import useTopBooks from "../hooks/useTopBooks";
 
-type Book = {
-  bookName: string;
-  description: string;
-  author: string;
-  timeOfPub: string;
-  coverImage: StaticImageData;
-};
-
+// TODO: use nextjs image component and optimize images
 const BookSegment = () => {
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const [index, setIndex] = useState(0);
   const [coverImageScope, coverImageAnimate] = useAnimate();
   const [textScope, textAnimate] = useAnimate();
+  const { data, error } = useTopBooks();
+
+  const books = data?.data.payload.books;
+  const booksCount = books?.length ? books?.length - 1 : 3;
+
+  if (error) return <Typography>{error.message}</Typography>;
 
   useInterval(
     () => {
       console.log("interval");
-      index === 2 ? setIndex(0) : setIndex(index + 1);
+      index === booksCount ? setIndex(0) : setIndex(index + 1);
     },
     5000,
     [index]
@@ -65,33 +62,6 @@ const BookSegment = () => {
     return truncatedString;
   };
 
-  const books: Book[] = [
-    {
-      bookName: "کتاب قرمز",
-      description:
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-      author: "نویسنده مهربان",
-      timeOfPub: "مهر 1403",
-      coverImage: bookCoverRed,
-    },
-    {
-      bookName: "کتاب آبی",
-      description:
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-      author: "نویسنده خسته",
-      timeOfPub: "آبان 1402",
-      coverImage: bookCoverBlue,
-    },
-    {
-      bookName: "کتاب سبز",
-      description:
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-      author: "نویسنده عصبانی",
-      timeOfPub: "آذر 1401",
-      coverImage: bookCoverGreen,
-    },
-  ];
-
   return (
     <Paper
       sx={{
@@ -123,12 +93,14 @@ const BookSegment = () => {
               gap: 5,
             }}
           >
-            {books.map((book, bookIndex) => (
-              <Image
+            {books?.map((book, bookIndex) => (
+              <img
                 onClick={() => setIndex(bookIndex)}
-                src={book.coverImage}
-                alt={book.bookName}
-                key={book.bookName}
+                src={book.cover_image ? book.cover_image : bookCoverGreen.src}
+                alt={book.title}
+                key={book.id}
+                width={500}
+                height={500}
                 style={{
                   objectFit: "contain",
                   height: "30%",
@@ -144,27 +116,34 @@ const BookSegment = () => {
           </Box>
         )}
         <Box sx={{ width: isMdUp ? "80%" : "100%", flexGrow: 1 }}>
-          <Image
+          <img
             ref={coverImageScope}
-            src={books[index].coverImage}
-            alt={books[index].bookName}
+            src={
+              books
+                ? books[index].cover_image
+                  ? books[index].cover_image
+                  : bookCoverGreen.src
+                : bookCoverGreen.src
+            }
+            alt={books ? books[index].title : ""}
             key={index}
+            width={500}
+            height={500}
             style={{
               objectFit: "contain",
               height: isMdUp ? "100%" : "auto",
               width: isMdUp ? "auto" : "100%",
-              transformOrigin:
-                isMdUp?
-                index === 0
+              transformOrigin: isMdUp
+                ? index === 0
                   ? "top right"
                   : index === 1
                   ? "right"
                   : "bottom right"
-                  :index === 0
-                  ? "bottom right"
-                  : index === 1
-                  ? "bottom"
-                  : "bottom left",
+                : index === 0
+                ? "bottom right"
+                : index === 1
+                ? "bottom"
+                : "bottom left",
             }}
           />
         </Box>
@@ -177,12 +156,14 @@ const BookSegment = () => {
               gap: 5,
             }}
           >
-            {books.map((book, bookIndex) => (
-              <Image
+            {books?.map((book, bookIndex) => (
+              <img
                 onClick={() => setIndex(bookIndex)}
-                src={book.coverImage}
-                alt={book.bookName}
-                key={book.bookName}
+                src={book.cover_image ? book.cover_image : bookCoverGreen.src}
+                alt={book.title}
+                key={book.id}
+                width={500}
+                height={500}
                 style={{
                   objectFit: "contain",
                   height: "auto",
@@ -191,7 +172,7 @@ const BookSegment = () => {
                   filter:
                     index === bookIndex ? "brightness(0.7)" : "brightness(0.3)",
                   scale: index === bookIndex ? 1 : 0.9,
-                  transition: "1s ease-in-out",         
+                  transition: "1s ease-in-out",
                 }}
               />
             ))}
@@ -209,15 +190,28 @@ const BookSegment = () => {
           maxHeight: isMdUp ? "50vh" : "auto",
         }}
       >
-        <Typography variant="h3">{books[index].bookName}</Typography>
-        <Typography variant="h4">نوشته: {books[index].author}</Typography>
+        <Typography variant="h3">{books ? books[index].title : ""}</Typography>
+        <Typography variant="h4">
+          نوشته: {books ? books[index].authors : ""}
+        </Typography>
         <Typography variant="body1">
           {isMdUp
-            ? truncateString(books[index].description, 50)
-            : truncateString(books[index].description, 30)}
+            ? truncateString(
+                books && books[index].description
+                  ? books[index].description
+                  : "",
+                50
+              )
+            : truncateString(
+                books && books[index].description
+                  ? books[index].description
+                  : "",
+                30
+              )}
         </Typography>
         <Typography variant="caption">
-          منتشر شده در {books[index].timeOfPub}
+          منتشر شده در{" "}
+          {books && books[index].published ? books[index].published : ""}
         </Typography>
       </Paper>
     </Paper>
