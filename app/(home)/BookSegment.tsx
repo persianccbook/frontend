@@ -17,8 +17,6 @@ const BookSegment = () => {
   const books = data?.data.payload.books;
   const booksCount = books?.length ? books?.length - 1 : 3;
 
-  if (error) return <Typography>{error.message}</Typography>;
-
   useInterval(
     () => {
       console.log("interval");
@@ -61,6 +59,9 @@ const BookSegment = () => {
     }
     return truncatedString;
   };
+
+  if (error) return <Typography>{error.message}</Typography>;
+
 
   return (
     <Paper
