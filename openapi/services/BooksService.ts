@@ -7,6 +7,8 @@ import type { ChapterSchema } from '../models/ChapterSchema';
 import type { GenreSchema } from '../models/GenreSchema';
 import type { PageSchema } from '../models/PageSchema';
 import type { PaginatedBooksSchema } from '../models/PaginatedBooksSchema';
+import type { SingleBookSchema } from '../models/SingleBookSchema';
+import type { TopBooksSchema } from '../models/TopBooksSchema';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -34,12 +36,12 @@ export class BooksService {
     /**
      * Get Book
      * @param bookId
-     * @returns BookSchema OK
+     * @returns SingleBookSchema OK
      * @throws ApiError
      */
     public static apiBookApiGetBook(
         bookId: number,
-    ): CancelablePromise<BookSchema> {
+    ): CancelablePromise<SingleBookSchema> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/books/get_book',
@@ -50,10 +52,10 @@ export class BooksService {
     }
     /**
      * Top Books
-     * @returns BookSchema OK
+     * @returns TopBooksSchema OK
      * @throws ApiError
      */
-    public static apiBookApiTopBooks(): CancelablePromise<Array<BookSchema>> {
+    public static apiBookApiTopBooks(): CancelablePromise<TopBooksSchema> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/books/top_books',

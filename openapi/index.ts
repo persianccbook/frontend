@@ -23,11 +23,16 @@ export type { PasswordResetConfirmSchema } from './models/PasswordResetConfirmSc
 export type { PasswordResetRequestSchema } from './models/PasswordResetRequestSchema';
 export type { Schema } from './models/Schema';
 export type { SignInSchema } from './models/SignInSchema';
+export type { SingleBookDataSchema } from './models/SingleBookDataSchema';
+export type { SingleBookSchema } from './models/SingleBookSchema';
 export type { TokenObtainPairInputSchema } from './models/TokenObtainPairInputSchema';
 export type { TokenObtainPairOutputSchema } from './models/TokenObtainPairOutputSchema';
 export type { TokenRefreshInputSchema } from './models/TokenRefreshInputSchema';
 export type { TokenRefreshOutputSchema } from './models/TokenRefreshOutputSchema';
 export type { TokenVerifyInputSchema } from './models/TokenVerifyInputSchema';
+export type { TopBookSchema } from './models/TopBookSchema';
+export type { TopBooksDataSchema } from './models/TopBooksDataSchema';
+export type { TopBooksSchema } from './models/TopBooksSchema';
 export type { UserSchema } from './models/UserSchema';
 
 export { AuthService } from './services/AuthService';
