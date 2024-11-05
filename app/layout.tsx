@@ -22,18 +22,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ReactQueryClientProvider>
     <html lang="fa" dir="rtl">
       <GoogleAnalyticsScript />
       <body>
-        <PaletteProvider>
-          <CssBaseline />
-          <NavBar />
-          <main id="root">{children}</main>
-          <Footer />
-        </PaletteProvider>
+        <ReactQueryClientProvider>
+          <PaletteProvider>
+            <CssBaseline />
+            <NavBar />
+            <main id="root">{children}</main>
+            <Footer />
+          </PaletteProvider>
+        </ReactQueryClientProvider>
       </body>
     </html>
-    </ReactQueryClientProvider>
   );
 }
