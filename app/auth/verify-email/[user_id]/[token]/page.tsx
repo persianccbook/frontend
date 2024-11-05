@@ -1,27 +1,29 @@
+'use client'
+import { useEffect, useState } from "react";
 import { ApiResponseSchema, AuthService, OpenAPI } from "../../../../../openapi";
 
 interface Props {
   params: { user_id: string; token: string };
 }
 
-const VerifyEmailPage = async ({ params: { user_id, token } }: Props) => {
-  let res = {} as ApiResponseSchema;
+const VerifyEmailPage =  ({ params: { user_id, token } }: Props) => {
+  const [res, setRes] = useState({} as ApiResponseSchema);
 
-  OpenAPI.BASE='http://localhost'
 
-  const verifyEmail = async () => {
-    try {
-      res = await AuthService.apiAuthApiVerifyEmail({
-        user_id: user_id,
-        token: token,
-      });
-    } catch (error: unknown) {
-      console.log(error);
-    }
-    console.log(res);
-  };
-
-  await verifyEmail();
+  useEffect(() => {
+    const verifyEmail = async () => {
+      try {
+        const response = await AuthService.apiAuthApiVerifyEmail({
+          user_id: user_id,
+          token: token,
+        });
+        setRes(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    verifyEmail();
+  }, [user_id, token]);
 
   return (
     <div>
