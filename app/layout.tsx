@@ -5,6 +5,7 @@ import { CssBaseline } from "@mui/material";
 import GoogleAnalyticsScript from "./GoogleAnalyticsScript";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import { ReactQueryClientProvider } from "./components/ReactQueryClientProvider";
 
 export const metadata: Metadata = {
   title: "PersianCCBook",
@@ -21,6 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    <ReactQueryClientProvider>
     <html lang="fa" dir="rtl">
       <GoogleAnalyticsScript />
       <body>
@@ -32,5 +34,6 @@ export default function RootLayout({
         </PaletteProvider>
       </body>
     </html>
+    </ReactQueryClientProvider>
   );
 }
