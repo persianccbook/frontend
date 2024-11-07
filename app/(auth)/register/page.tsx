@@ -11,11 +11,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import NextLink from "next/link";
-import { AuthService, SignInSchema } from "../../../openapi";
+import { ApiResponseSchema, AuthService, SignInSchema } from "../../../openapi";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 const schema = z
   .object({
@@ -42,6 +44,9 @@ type FormData = z.infer<typeof schema>;
 
 const RegisterPage = () => {
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
+  const [res, setRes] = useState({} as ApiResponseSchema);
+  const [error, setError] = useState({} as AxiosError);
+  const router = useRouter();
 
   const {
     register,
@@ -51,24 +56,52 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await AuthService.apiAuthApiRegister({
-        email:data.email,password:data.password
+      const res = await AuthService.apiAuthApiRegister({
+        email: data.email,
+        password: data.password,
       } as SignInSchema);
-    } catch (error: unknown) {
-      console.log(error);
+      setRes(res);
+      console.log(res);
+    } catch (error: any) {
+      setError(error);
     }
-    console.log(data);
   };
+
+  useEffect(() => {
+    if (res.status === "success") {
+      const timeoutId = setTimeout(() => {
+        router.push("/");
+      }, 5000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [res]);
+
   return (
     <>
       <Typography variant="h4" sx={{ mb: 15 }}>
         ثبت نام
       </Typography>
-      {/* {apiError && (
+      {error.message && (
         <Typography variant="caption" color="error">
-          ایمیل یا گذرواژه وارد شده اشتباه است.
+          {error.message}
         </Typography>
-      )} */}
+      )}
+      {res.status === "error" && (
+        <Typography variant="caption" color="error">
+          {res.data.message}
+        </Typography>
+      )}
+      {res.status === "success" && (
+        <>
+          <Typography display="block" variant="caption" color="primary">
+            حساب کاربری شما با موفقیت ساخته شد.
+          </Typography>
+          <Typography display="block" variant="caption" color="primary">
+            برای فعالسازی حساب کاربری، ایمیل خود را چک کنید.
+          </Typography>
+        </>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl sx={{ minWidth: 290 }}>
           <FormLabel sx={{ mb: 3 }}>ایمیل:</FormLabel>
