@@ -1,6 +1,6 @@
 import React from "react";
 import useAuthor from "../hooks/useAuthor";
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 
 interface Props {
   authorId: string;
