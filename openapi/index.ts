@@ -8,6 +8,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { ApiResponseSchema } from './models/ApiResponseSchema';
+export type { AuthorSchema } from './models/AuthorSchema';
 export type { BookSchema } from './models/BookSchema';
 export type { ChangePasswordSchema } from './models/ChangePasswordSchema';
 export type { ChapterSchema } from './models/ChapterSchema';
@@ -16,6 +17,9 @@ export type { EmailVerificationSchema } from './models/EmailVerificationSchema';
 export type { ErrorSchema } from './models/ErrorSchema';
 export type { GenreSchema } from './models/GenreSchema';
 export type { PageSchema } from './models/PageSchema';
+export type { PaginatedAuthors } from './models/PaginatedAuthors';
+export type { PaginatedAuthorsDataSchema } from './models/PaginatedAuthorsDataSchema';
+export type { PaginatedAuthorsSchema } from './models/PaginatedAuthorsSchema';
 export type { PaginatedBooks } from './models/PaginatedBooks';
 export type { PaginatedBooksDataSchema } from './models/PaginatedBooksDataSchema';
 export type { PaginatedBooksSchema } from './models/PaginatedBooksSchema';
@@ -23,6 +27,8 @@ export type { PasswordResetConfirmSchema } from './models/PasswordResetConfirmSc
 export type { PasswordResetRequestSchema } from './models/PasswordResetRequestSchema';
 export type { Schema } from './models/Schema';
 export type { SignInSchema } from './models/SignInSchema';
+export type { SingleAuthorDataSchema } from './models/SingleAuthorDataSchema';
+export type { SingleAuthorSchema } from './models/SingleAuthorSchema';
 export type { SingleBookDataSchema } from './models/SingleBookDataSchema';
 export type { SingleBookSchema } from './models/SingleBookSchema';
 export type { TokenObtainPairInputSchema } from './models/TokenObtainPairInputSchema';
@@ -36,6 +42,7 @@ export type { TopBooksSchema } from './models/TopBooksSchema';
 export type { UserSchema } from './models/UserSchema';
 
 export { AuthService } from './services/AuthService';
+export { AuthorService } from './services/AuthorService';
 export { BooksService } from './services/BooksService';
 export { TokenService } from './services/TokenService';
 export { UsersService } from './services/UsersService';
