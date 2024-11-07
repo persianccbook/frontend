@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimate } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { BookSchema } from "../../openapi";
+import AuthorTag from "./AuthorTag";
 
 interface Props {
   book: BookSchema;
@@ -150,7 +151,16 @@ const BookCard = ({ book }: Props) => {
               variant="caption"
               component="h2"
             >
-              {book.title}({book.authors})
+              {book.title}({book.authors.map((author, index) => {
+                    return book.authors.length === index+1 ? (
+                      <AuthorTag authorId={author.toString()} />
+                    ) : (
+                      <>
+                        <AuthorTag authorId={author.toString()} />
+                        <>,</>
+                      </>
+                    );
+                  })})
             </Typography>
           </Box>
         </CardContent>
