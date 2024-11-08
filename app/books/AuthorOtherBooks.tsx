@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import { useState } from "react";
 import useAuthor from "../hooks/useAuthor";
 import useAuthorBooks from "../hooks/useAuthorBook";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
@@ -18,6 +18,8 @@ const AuthorBooksSegment = ({ authorId }: { authorId: number }) => {
     pageNumber: pageNumber,
   });
   const { data: authorData, error: authorErr } = useAuthor(authorId.toString());
+
+  if (authorErr || bookErr) return <Typography>{bookErr && bookErr.message}{authorErr && authorErr.message}</Typography>;
 
   const booksPage = bookData?.data.payload;
   const author = authorData?.data.payload;
