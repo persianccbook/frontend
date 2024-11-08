@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowBack } from "@mui/icons-material";
 import useAuthStore from "../../../store/authStore";
 import AuthorTag from "../AuthorTag";
+import AuthorOtherBooks from "../AuthorOtherBooks";
 
 interface Props {
   params: { bookId: string };
@@ -30,7 +31,7 @@ const BookPage = ({ params: { bookId } }: Props) => {
       >
         <ArrowBack></ArrowBack>بازگشت به صفحه کتاب ها
       </Button>
-      <Paper sx={{ display: "flex", gap: 10, p: 5 }}>
+      <Paper sx={{ display: "flex", gap: 10, p: 5, mb: 10 }}>
         <Box
           sx={{
             display: "flex",
@@ -80,6 +81,7 @@ const BookPage = ({ params: { bookId } }: Props) => {
           </Typography>
         </Paper>
       </Paper>
+      {book?.authors &&<AuthorOtherBooks authors={book?.authors}/>}
     </Box>
   );
 };
