@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { BookChaptersSchema } from '../models/BookChaptersSchema';
+import type { BookPagesSchema } from '../models/BookPagesSchema';
 import type { BookSchema } from '../models/BookSchema';
-import type { ChapterSchema } from '../models/ChapterSchema';
 import type { GenreSchema } from '../models/GenreSchema';
-import type { PageSchema } from '../models/PageSchema';
 import type { PaginatedBooksSchema } from '../models/PaginatedBooksSchema';
 import type { SingleBookSchema } from '../models/SingleBookSchema';
 import type { TopBooksSchema } from '../models/TopBooksSchema';
@@ -64,12 +64,12 @@ export class BooksService {
     /**
      * Get Book Chapters
      * @param bookId
-     * @returns ChapterSchema OK
+     * @returns BookChaptersSchema OK
      * @throws ApiError
      */
     public static apiBookApiGetBookChapters(
         bookId: number,
-    ): CancelablePromise<Array<ChapterSchema>> {
+    ): CancelablePromise<BookChaptersSchema> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/books/get_book_chapters',
@@ -82,16 +82,16 @@ export class BooksService {
      * Get Chapter Pages
      * @param bookId
      * @param chapterNumber
-     * @returns PageSchema OK
+     * @returns BookPagesSchema OK
      * @throws ApiError
      */
     public static apiBookApiGetChapterPages(
         bookId: number,
         chapterNumber: number,
-    ): CancelablePromise<Array<PageSchema>> {
+    ): CancelablePromise<BookPagesSchema> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/v1/books/get_chapter_',
+            url: '/api/v1/books/get_chapter_pages',
             query: {
                 'book_id': bookId,
                 'chapter_number': chapterNumber,
