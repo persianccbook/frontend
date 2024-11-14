@@ -1,7 +1,6 @@
-<!--
-Notes for maintaining this document:
+<!-- یادداشت‌های نگهداری این سند:
 
-*   Update the link for `cm-html` once in a while
+*   به روزرسانی پیوند برای `cm-html` هر از چند گاهی
 -->
 
 # react-markdown
@@ -14,96 +13,87 @@ Notes for maintaining this document:
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-React component to render markdown.
+کامپوننت React برای رندر کردن markdown.
 
-## Feature highlights
+## نکات برجسته
 
-* [x] **[safe][section-security] by default**
-  (no `dangerouslySetInnerHTML` or XSS attacks)
-* [x] **[components][section-components]**
-  (pass your own component to use instead of `<h2>` for `## hi`)
-* [x] **[plugins][section-plugins]**
-  (many plugins you can pick and choose from)
-* [x] **[compliant][section-syntax]**
-  (100% to CommonMark, 100% to GFM with a plugin)
+* [x] **[ایمن][section-security] به طور پیش‌فرض**
+  (بدون `dangerouslySetInnerHTML` یا حملات XSS)
+* [x] **[کامپوننت‌ها][section-components]**
+  (پاس دادن کامپوننت خود برای استفاده به جای `<h2>` برای `## hi`)
+* [x] **[پلاگین‌ها][section-plugins]**
+  (پلاگین‌های زیادی که می‌توانید انتخاب کنید)
+* [x] **[همراه با][section-syntax]**
+  (100% به CommonMark، 100% به GFM با پلاگین)
 
-## Contents
+## محتوا
 
-* [What is this?](#what-is-this)
-* [When should I use this?](#when-should-i-use-this)
-* [Install](#install)
-* [Use](#use)
-* [API](#api)
-  * [`Markdown`](#markdown)
+* [چه چیزی است؟](#چه-چیزی-است؟)
+* [ kdy باید از این استفاده کنم؟](#kdy-باید-از-این-استفاده-کنم؟)
+* [نصب](#نصب)
+* [استفاده](#استفاده)
+* [API](#API)
+  * [`Markdown`](#Markdown)
   * [`defaultUrlTransform(url)`](#defaulturltransformurl)
   * [`AllowElement`](#allowelement)
   * [`Components`](#components)
   * [`ExtraProps`](#extraprops)
   * [`Options`](#options)
   * [`UrlTransform`](#urltransform)
-* [Examples](#examples)
-  * [Use a plugin](#use-a-plugin)
-  * [Use a plugin with options](#use-a-plugin-with-options)
-  * [Use custom components (syntax highlight)](#use-custom-components-syntax-highlight)
-  * [Use remark and rehype plugins (math)](#use-remark-and-rehype-plugins-math)
-* [Plugins](#plugins)
-* [Syntax](#syntax)
-* [Types](#types)
-* [Compatibility](#compatibility)
-* [Architecture](#architecture)
-* [Appendix A: HTML in markdown](#appendix-a-html-in-markdown)
-* [Appendix B: Components](#appendix-b-components)
-* [Appendix C: line endings in markdown (and JSX)](#appendix-c-line-endings-in-markdown-and-jsx)
-* [Security](#security)
-* [Related](#related)
-* [Contribute](#contribute)
-* [License](#license)
+* [مثال‌ها](#مثال‌ها)
+  * [استفاده از پلاگین](#استفاده-از-پلاگین)
+  * [استفاده از پلاگین با گزینه‌ها](#استفاده-از-پلاگین-با-گزینه‌ها)
+  * [استفاده از کامپوننت‌های سفارشی (سورس‌هیلایت)](#استفاده-از-کامپوننت‌های-سفارشی-سورس‌هیلایت)
+  * [استفاده از پلاگین‌های remark و rehype (ریاضی)](#استفاده-از-پلاگین‌های-remark-و-rehype-ریاضی)
+* [پلاگین‌ها](#پلاگین‌ها)
+* [سورس](#سورس)
+* [انواع](#انواع)
+* [همراهی](#همراهی)
+* [معماری](#معماری)
+* [ضمیمه A: HTML در markdown](#ضمیمه-a-html-در-markdown)
+* [ضمیمه B: کامپوننت‌ها](#ضمیمه-b-کامپوننت‌ها)
+* [ضمیمه C: خطوط پایان در markdown (و JSX)](#ضمیمه-c-خطوط-پایان-در-markdown-و-jsx)
+* [امنیت](#امنیت)
+* [مرتبط](#مرتبط)
+* [مشارکت](#مشارکت)
+* [لیسانس](#لیسانس)
 
-## What is this?
+## چه چیزی است؟
 
-This package is a [React][] component that can be given a string of markdown
-that it’ll safely render to React elements.
-You can pass plugins to change how markdown is transformed and pass components
-that will be used instead of normal HTML elements.
+این پکیج یک کامپوننت React است که می‌تواند یک رشته markdown را دریافت کند و آن را به طور ایمن به عناصر React تبدیل کند.
+شما می‌توانید پلاگین‌ها را پاس دهید تا چگونگی تبدیل markdown را تغییر دهید و کامپوننت‌هایی را پاس دهید که به جای عناصر HTML معمولی استفاده شوند.
 
-* to learn markdown, see this [cheatsheet and tutorial][commonmark-help]
-* to try out `react-markdown`, see [our demo][demo]
+* برای یادگیری markdown، به این [راهنما و آموزش][commonmark-help] مراجعه کنید
+* برای آزمایش `react-markdown`، به [демо ما][demo] مراجعه کنید
 
-## When should I use this?
 
-There are other ways to use markdown in React out there so why use this one?
-The three main reasons are that they often rely on `dangerouslySetInnerHTML`,
-have bugs with how they handle markdown, or don’t let you swap elements for
-components.
-`react-markdown` builds a virtual DOM, so React only replaces what changed,
-from a syntax tree.
-That’s supported because we use [unified][], specifically [remark][] for
-markdown and [rehype][] for HTML, which are popular tools to transform content
-with plugins.
+## kdy باید از این استفاده کنم؟
 
-This package focusses on making it easy for beginners to safely use markdown in
-React.
-When you’re familiar with unified, you can use a modern hooks based alternative
-[`react-remark`][react-remark] or [`rehype-react`][rehype-react] manually.
-If you instead want to use JavaScript and JSX *inside* markdown files, use
-[MDX][].
+چرا باید از این پکیج استفاده کنم؟ 
+سه دلیل اصلی این است که پکیج‌های دیگر به `dangerouslySetInnerHTML` متکی هستند، باگ‌هایی در تبدیل markdown دارند یا اجازه نمی‌دهند که عناصر را با کامپوننت‌ها جایگزین کنید.
+`react-markdown` یک درخت مجازی می‌سازد، بنابراین React فقط آنچه تغییر کرده را جایگزین می‌کند.
+این پشتیبانی می‌شود زیرا ما از [unified][]، به طور خاص [remark][] برای markdown و [rehype][] برای HTML، که ابزارهای محبوب برای تبدیل محتوا با پلاگین‌ها هستند، استفاده می‌کنیم.
 
-## Install
+این پکیج بر روی این تمرکز دارد که استفاده از markdown در React برای مبتدیان راحت و ایمن باشد.
+وقتی که با unified آشنا شدید، می‌توانید از یک جایگزین مدرن مبتنی بر هوک‌ها به نام [`react-remark`][react-remark] یا [`rehype-react`][rehype-react] استفاده کنید.
+اگر می‌خواهید از جاوااسکریپت و JSX *درون* فایل‌های markdown استفاده کنید، از [MDX][] استفاده کنید.
 
-This package is [ESM only][esm].
-In Node.js (version 16+), install with [npm][]:
+## نصب
+
+این پکیج فقط برای ESM است.
+در Node.js (نسخه 16+)، با npm نصب کنید:
 
 ```sh
 npm install react-markdown
 ```
 
-In Deno with [`esm.sh`][esmsh]:
+در Deno با [`esm.sh`][esmsh]:
 
 ```js
 import Markdown from 'https://esm.sh/react-markdown@9'
 ```
 
-In browsers with [`esm.sh`][esmsh]:
+در مرورگرها با [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
@@ -111,42 +101,40 @@ In browsers with [`esm.sh`][esmsh]:
 </script>
 ```
 
-## Use
+## استفاده
 
-A basic hello world:
+یک مثال ساده:
 
 ```jsx
-import React from 'react'
-import {createRoot} from 'react-dom/client'
-import Markdown from 'react-markdown'
+import React from'react'
+import {createRoot} from'react-dom/client'
+import Markdown from'react-markdown'
 
-const markdown = '# Hi, *Pluto*!'
+const markdown = '# سلام، *پلوتو*!'
 
 createRoot(document.body).render(<Markdown>{markdown}</Markdown>)
 ```
 
 <details>
-<summary>Show equivalent JSX</summary>
+<summary>نمایش JSX معادل</summary>
 
 ```jsx
 <h1>
-  Hi, <em>Pluto</em>!
+  سلام، <em>پلوتو</em>!
 </h1>
 ```
 
 </details>
 
-Here is an example that shows how to use a plugin ([`remark-gfm`][remark-gfm],
-which adds support for footnotes, strikethrough, tables, tasklists and URLs
-directly):
+در اینجا مثالی است که نشان می‌دهد چگونه از یک پلاگین استفاده کنید ([`remark-gfm`][remark-gfm]، که پشتیبانی از پانویس، خط خوردگی، جداول، لیست وظایف و آدرس‌های وب را اضافه می‌کند):
 
 ```jsx
-import React from 'react'
-import {createRoot} from 'react-dom/client'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import React from'react'
+import {createRoot} from'react-dom/client'
+import Markdown from'react-markdown'
+import remarkGfm from'remark-gfm'
 
-const markdown = `Just a link: www.nasa.gov.`
+const markdown = `فقط یک لینک: www.nasa.gov.`
 
 createRoot(document.body).render(
   <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
@@ -154,11 +142,11 @@ createRoot(document.body).render(
 ```
 
 <details>
-<summary>Show equivalent JSX</summary>
+<summary>نمایش JSX معادل</summary>
 
 ```jsx
 <p>
-  Just a link: <a href="http://www.nasa.gov">www.nasa.gov</a>.
+  فقط یک لینک: <a href="http://www.nasa.gov">www.nasa.gov</a>.
 </p>
 ```
 
@@ -166,69 +154,296 @@ createRoot(document.body).render(
 
 ## API
 
-This package exports the following identifier:
+این پکیج شناسه‌های زیر را صادر می‌کند:
 [`defaultUrlTransform`][api-default-url-transform].
-The default export is [`Markdown`][api-markdown].
+صادرات پیش‌فرض [`Markdown`][api-markdown] است.
 
 ### `Markdown`
 
-Component to render markdown.
+کامپوننت برای رندر کردن markdown.
 
-###### Parameters
+###### پارامترها
 
 * `options` ([`Options`][api-options])
   — props
 
-###### Returns
+###### بازگشت
 
-React element (`JSX.Element`).
+عنصر React (`JSX.Element`).
 
 ### `defaultUrlTransform(url)`
 
-Make a URL safe.
+آدرس را ایمن کنید.
 
-###### Parameters
+###### پارامترها
 
 * `url` (`string`)
-  — URL
+  — آدرس
 
-###### Returns
+###### بازگشت
 
-Safe URL (`string`).
+آدرس ایمن (`string`).
 
 ### `AllowElement`
 
-Filter elements (TypeScript type).
+فیلتر عناصر (نوع TypeScript).
 
-###### Parameters
+###### پارامترها
 
-* `node` ([`Element` from `hast`][hast-element])
-  — element to check
+* `node` ([`Element` از `hast`][hast-element])
+  — عنصر برای چک کردن
 * `index` (`number | undefined`)
-  — index of `element` in `parent`
-* `parent` ([`Node` from `hast`][hast-node])
-  — parent of `element`
+  — ایندکس `element` در `parent`
+* `parent` ([`Node` از `hast`][hast-node])
+  — والد `element`
 
-###### Returns
+###### بازگشت
 
-Whether to allow `element` (`boolean`, optional).
+آیا `element` را اجازه دهید (`boolean`، اختیاری).
 
 ### `Components`
 
-Map tag names to components (TypeScript type).
+نقشه تگ‌ها به کامپوننت‌ها (نوع TypeScript).
 
-###### Type
+###### نوع
 
 ```ts
 import type {Element} from 'hast'
 
 type Components = Partial<{
   [TagName in keyof JSX.IntrinsicElements]:
-    // Class component:
+    // کامپوننت کلاس:
     | (new (props: JSX.IntrinsicElements[TagName] & ExtraProps) => JSX.ElementClass)
-    // Function component:
+    // کامپوننت تابع:
     | ((props: JSX.IntrinsicElements[TagName] & ExtraProps) => JSX.Element | string | null | undefined)
-    // Tag name:
+    // نام تگ:
     | keyof JSX.IntrinsicElements
 }>
 ```
+
+### `ExtraProps`
+
+پروپ‌های اضافی (نوع TypeScript).
+
+###### نوع
+
+```ts
+type ExtraProps = Record<string, unknown>
+```
+
+### `Options`
+
+گزینه‌ها (نوع TypeScript).
+
+###### نوع
+
+```ts
+type Options = {
+  /**
+   * اجزای سفارشی برای استفاده به جای عناصر HTML معمولی.
+   */
+  components?: Components
+  /**
+   * پلاگین‌های remark برای استفاده در تبدیل markdown.
+   */
+  remarkPlugins?: Plugin[]
+  /**
+   * پلاگین‌های rehype برای استفاده در تبدیل HTML.
+   */
+  rehypePlugins?: Plugin[]
+  /**
+   * اجزای سفارشی برای استفاده به جای عناصر HTML معمولی.
+   */
+  allowElement?: AllowElement
+  /**
+   * پروپ‌های اضافی برای پاس دادن به کامپوننت‌ها.
+   */
+  extraProps?: ExtraProps
+  /**
+   * تابعی برای تبدیل آدرس‌ها.
+   */
+  urlTransform?: UrlTransform
+}
+```
+
+### `UrlTransform`
+
+تابع تبدیل آدرس (نوع TypeScript).
+
+###### نوع
+
+```ts
+type UrlTransform = (url: string) => string
+```
+
+## مثال‌ها
+
+### استفاده از پلاگین
+
+```jsx
+import React from'react'
+import {createRoot} from'react-dom/client'
+import Markdown from'react-markdown'
+import remarkGfm from'remark-gfm'
+
+const markdown = `فقط یک لینک: www.nasa.gov.`
+
+createRoot(document.body).render(
+  <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
+)
+```
+
+### استفاده از پلاگین با گزینه‌ها
+
+```jsx
+import React from'react'
+import {createRoot} from'react-dom/client'
+import Markdown from'react-markdown'
+import remarkGfm from'remark-gfm'
+
+const markdown = `فقط یک لینک: www.nasa.gov.`
+
+createRoot(document.body).render(
+  <Markdown remarkPlugins={[remarkGfm]} options={{allowElement: ['a']}}>{markdown}</Markdown>
+)
+```
+
+### استفاده از کامپوننت‌های سفارشی (سورس‌هیلایت)
+
+```jsx
+import React from'react'
+import {createRoot} from'react-dom/client'
+import Markdown from'react-markdown'
+import {Code} from './Code'
+
+const markdown = '```js\nconsole.log("سلام، دنیا!");\n```'
+
+createRoot(document.body).render(
+  <Markdown components={{code: Code}}>{markdown}</Markdown>
+)
+```
+
+### استفاده از پلاگین‌های remark و rehype (ریاضی)
+
+```jsx
+import React from'react'
+import {createRoot} from'react-dom/client'
+import Markdown from'react-markdown'
+import remarkMath from'remark-math'
+import rehypeKatex from'rehype-katex'
+
+const markdown = '$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$'
+
+createRoot(document.body).render(
+  <Markdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>{markdown}</Markdown>
+)
+```
+
+## پلاگین‌ها
+
+* [remark-gfm][remark-gfm]
+* [remark-math][remark-math]
+* [rehype-katex][rehype-katex]
+
+## سورس
+
+* [CommonMark][commonmark]
+* [GFM][gfm]
+
+## انواع
+
+* [TypeScript][typescript]
+
+## همراهی
+
+* [React][react]
+* [remark][remark]
+* [rehype][rehype]
+
+## معماری
+
+* [unified][unified]
+
+## ضمیمه A: HTML در markdown
+
+* [HTML در markdown][html-in-markdown]
+
+## ضمیمه B: کامپوننت‌ها
+
+* [کامپوننت‌ها در React][components-in-react]
+
+## ضمیمه C: خطوط پایان در markdown (و JSX)
+
+* [خطوط پایان در markdown][line-endings-in-markdown]
+* [خطوط پایان در JSX][line-endings-in-jsx]
+
+## امنیت
+
+* [امنیت در React][security-in-react]
+
+
+## مرتبط
+
+* [MDX][mdx]
+* [remark][remark]
+* [rehype][rehype]
+
+## مشارکت
+
+* [مشارکت در پروژه][contribute-to-project]
+
+## لایسنس
+
+* [لایسنس MIT][mit-license]
+
+## توسعه‌دهندگان
+
+* [تیم توسعه‌دهندگان][developers]
+
+## پشتیبانی
+
+* [پشتیبانی مالی][financial-support]
+* [پشتیبانی فنی][technical-support]
+
+## منابع
+
+* [منابع و مراجع][resources]
+
+[build-badge]: https://img.shields.io/github/workflow/status/react-markdown/react-markdown/CI?label=build
+[build]: https://github.com/react-markdown/react-markdown/actions?query=workflow%3ACI
+[coverage-badge]: https://img.shields.io/codecov/c/github/react-markdown/react-markdown.svg
+[coverage]: https://codecov.io/github/react-markdown/react-markdown
+[downloads-badge]: https://img.shields.io/npm/dm/react-markdown.svg
+[downloads]: https://www.npmjs.com/package/react-markdown
+[size-badge]: https://img.shields.io/bundlephobia/minzip/react-markdown.svg
+[size]: https://bundlephobia.com/result?p=react-markdown
+[sponsors-badge]: https://img.shields.io/opencollective/sponsors/react-markdown.svg
+[collective]: https://opencollective.com/react-markdown
+[backers-badge]: https://img.shields.io/opencollective/backers/react-markdown.svg
+[chat-badge]: https://img.shields.io/badge/chat-online-brightgreen.svg
+[chat]: https://github.com/react-markdown/react-markdown/discussions
+
+[remark]: https://remark.js.org/
+[rehype]: https://rehype.js.org/
+[unified]: https://unified.js.org/
+[commonmark]: https://commonmark.org/
+[gfm]: https://github.github.com/gfm/
+[typescript]: https://www.typescriptlang.org/
+[react]: https://reactjs.org/
+[mdx]: https://mdxjs.com/
+[contribute-to-project]: https://github.com/react-markdown/react-markdown/blob/main/CONTRIBUTING.md
+[mit-license]: https://opensource.org/licenses/MIT
+[developers]: https://github.com/react-markdown/react-markdown/graphs/contributors
+[financial-support]: https://opencollective.com/react-markdown
+[technical-support]: https://github.com/react-markdown/react-markdown/discussions
+[resources]: https://github.com/react-markdown/react-markdown/blob/main/docs/resources.md
+
+[remark-gfm]: https://github.com/remarkjs/remark-gfm
+[remark-math]: https://github.com/remarkjs/remark-math
+[rehype-katex]: https://github.com/remarkjs/rehype-katex
+
+[html-in-markdown]: https://github.com/react-markdown/react-markdown/blob/main/docs/html-in-markdown.md
+[components-in-react]: https://reactjs.org/docs/components-and-props.html
+[line-endings-in-markdown]: https://github.com/react-markdown/react-markdown/blob/main/docs/line-endings-in-markdown.md
+[line-endings-in-jsx]: https://github.com/react-markdown/react-markdown/blob/main/docs/line-endings-in-jsx.md
+[security-in-react]: https://reactjs.org/docs/security.html
