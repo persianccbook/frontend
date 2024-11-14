@@ -8,7 +8,10 @@ const ColorModeSwitch = () => {
   const theme = mode === "dark" ? darkTheme : lightTheme;
 
   return (
-    <Button onClick={toggleMode}>
+    <Button
+      onClick={toggleMode}
+      sx={{ borderRadius: "50%", minHeight: 50, minWidth: 50, aspectRatio: 1 }}
+    >
       {mode !== "dark" ? (
         <DarkMode sx={{ color: theme.palette.text.primary }} />
       ) : (
