@@ -7,6 +7,7 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { AnnouncementSchema } from './models/AnnouncementSchema';
 export type { api__book_schema__BookChaptersSchema__1 } from './models/api__book_schema__BookChaptersSchema__1';
 export type { api__book_schema__BookChaptersSchema__2 } from './models/api__book_schema__BookChaptersSchema__2';
 export type { ApiResponseSchema } from './models/ApiResponseSchema';
@@ -33,6 +34,8 @@ export type { PasswordResetConfirmSchema } from './models/PasswordResetConfirmSc
 export type { PasswordResetRequestSchema } from './models/PasswordResetRequestSchema';
 export type { Schema } from './models/Schema';
 export type { SignInSchema } from './models/SignInSchema';
+export type { SingleAnnouncementDataSchema } from './models/SingleAnnouncementDataSchema';
+export type { SingleAnnouncementSchema } from './models/SingleAnnouncementSchema';
 export type { SingleAuthorDataSchema } from './models/SingleAuthorDataSchema';
 export type { SingleAuthorSchema } from './models/SingleAuthorSchema';
 export type { SingleBookDataSchema } from './models/SingleBookDataSchema';
@@ -50,5 +53,6 @@ export type { UserSchema } from './models/UserSchema';
 export { AuthService } from './services/AuthService';
 export { AuthorService } from './services/AuthorService';
 export { BooksService } from './services/BooksService';
+export { InfoService } from './services/InfoService';
 export { TokenService } from './services/TokenService';
 export { UsersService } from './services/UsersService';
