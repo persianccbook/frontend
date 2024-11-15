@@ -22,6 +22,7 @@ import useAuthStore from "../../store/authStore";
 import { Login, Logout } from "@mui/icons-material";
 import Logo from "./logo";
 import Link from "next/link";
+import ReaderNavMenu from "../reader/book/[book_id]/chapter/[chapter_id]/page/[page_id]/ReaderNavMenu";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -239,6 +240,11 @@ const NavBar = () => {
             </Search>
           )}
           <Box sx={{ flexGrow: 1 }} />
+          {pathName.startsWith("/reader") && (
+            <Box sx={{ flexGrow: 1 }}>
+              <ReaderNavMenu />
+            </Box>
+          )}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <ColorModeSwitch />
             {/* <IconButton size="large" aria-label="show 4 new mails">
@@ -270,7 +276,9 @@ const NavBar = () => {
               )}
             </IconButton>
           </Box>
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <ColorModeSwitch />
             <IconButton
               size="large"
               aria-label="show more"
@@ -283,6 +291,7 @@ const NavBar = () => {
           </Box>
         </Toolbar>
       </AppBar>
+
       {renderMobileMenu}
       {renderMenu}
     </Box>
