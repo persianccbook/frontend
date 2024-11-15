@@ -7,13 +7,15 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { api__book_schema__BookChaptersSchema__1 } from './models/api__book_schema__BookChaptersSchema__1';
+export type { api__book_schema__BookChaptersSchema__2 } from './models/api__book_schema__BookChaptersSchema__2';
 export type { ApiResponseSchema } from './models/ApiResponseSchema';
 export type { AuthorSchema } from './models/AuthorSchema';
-export type { BookChaptersSchema } from './models/BookChaptersSchema';
 export type { BookPagesSchema } from './models/BookPagesSchema';
 export type { BookSchema } from './models/BookSchema';
 export type { ChangePasswordSchema } from './models/ChangePasswordSchema';
 export type { ChapterDataSchema } from './models/ChapterDataSchema';
+export type { ChapterPagesSchema } from './models/ChapterPagesSchema';
 export type { ChapterSchema } from './models/ChapterSchema';
 export type { DataSchema } from './models/DataSchema';
 export type { EmailVerificationSchema } from './models/EmailVerificationSchema';

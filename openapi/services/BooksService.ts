@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { BookChaptersSchema } from '../models/BookChaptersSchema';
+import type { api__book_schema__BookChaptersSchema__2 } from '../models/api__book_schema__BookChaptersSchema__2';
 import type { BookPagesSchema } from '../models/BookPagesSchema';
 import type { BookSchema } from '../models/BookSchema';
 import type { GenreSchema } from '../models/GenreSchema';
@@ -64,12 +64,12 @@ export class BooksService {
     /**
      * Get Book Chapters
      * @param bookId
-     * @returns BookChaptersSchema OK
+     * @returns api__book_schema__BookChaptersSchema__2 OK
      * @throws ApiError
      */
     public static apiBookApiGetBookChapters(
         bookId: number,
-    ): CancelablePromise<BookChaptersSchema> {
+    ): CancelablePromise<api__book_schema__BookChaptersSchema__2> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/books/get_book_chapters',

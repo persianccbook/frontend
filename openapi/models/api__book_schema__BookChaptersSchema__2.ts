@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { ChapterDataSchema } from './ChapterDataSchema';
-export type BookChaptersSchema = {
+export type api__book_schema__BookChaptersSchema__2 = {
     status: string;
     data: ChapterDataSchema;
 };

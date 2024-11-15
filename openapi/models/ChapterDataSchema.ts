@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ChapterSchema } from './ChapterSchema';
+import type { api__book_schema__BookChaptersSchema__1 } from './api__book_schema__BookChaptersSchema__1';
 import type { ErrorSchema } from './ErrorSchema';
 export type ChapterDataSchema = {
     message: string;
-    payload: Array<ChapterSchema>;
+    payload: api__book_schema__BookChaptersSchema__1;
     error?: (ErrorSchema | null);
 };
 

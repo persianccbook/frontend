@@ -2,11 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { ChapterPagesSchema } from './ChapterPagesSchema';
 import type { ErrorSchema } from './ErrorSchema';
-import type { PageSchema } from './PageSchema';
 export type PageDataSchema = {
     message: string;
-    payload: Array<PageSchema>;
+    payload: ChapterPagesSchema;
     error?: (ErrorSchema | null);
 };
 
