@@ -27,13 +27,14 @@ const Reader = ({ params: { book_id, chapter_id, page_id } }: Props) => {
   );
   if (bookErr || chaptersErr || pagesErr)
     return (
-      <Typography>
+  <Typography>
         {bookErr && bookErr.message}
         {chaptersErr && chaptersErr.message}
         {pagesErr && pagesErr.message}
       </Typography>
     );
-  const chapters = chaptersData?.data.payload.chapters;
+    const {isMobileMenuOpen}=useReaderStore()
+    const chapters = chaptersData?.data.payload.chapters;
   const chapterTitle =
     chapters && chapters[parseInt(chapter_id) - 1]
       ? chapters[parseInt(chapter_id) - 1].title
@@ -80,14 +81,16 @@ const Reader = ({ params: { book_id, chapter_id, page_id } }: Props) => {
           >
             {bookData?.data.payload.title}/{chapterTitle}/{pageTitle}
           </Paper>
-          {isSmUp && chapters && <ReaderSideBar chapters={chapters} />}
+          {(isSmUp || isMobileMenuOpen) && chapters && <ReaderSideBar chapters={chapters} />}
         </Box>
         <Paper
           sx={{
+            display:isSmUp?"inline":isMobileMenuOpen?"none":"inline",
             p: 15,
             fontSize: fontSize,
             borderRadius: "15px",
             maxWidth: "90vw",
+            width:"100%",
             mx: "auto",
             overflowX: "hidden",
             overflowY: "auto",

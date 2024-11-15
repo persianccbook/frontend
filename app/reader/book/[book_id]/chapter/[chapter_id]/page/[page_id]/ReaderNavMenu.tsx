@@ -1,4 +1,4 @@
-import { List, Settings } from "@mui/icons-material";
+import { AutoStories, Menu, MenuOpen } from "@mui/icons-material";
 import { Box, Button, useMediaQuery } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
 import useReaderStore from "../../../../../../../../store/readerStore";
@@ -18,7 +18,7 @@ const IconButton = styled(Button)({
 });
 
 const ReaderNavMenu = () => {
-  const { setActiveMenu } = useReaderStore();
+  const { isMobileMenuOpen, toggleMobileMenuState } = useReaderStore();
   const theme = useTheme();
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -27,32 +27,54 @@ const ReaderNavMenu = () => {
   return (
     <Box
       sx={{
+        border: 1,
+        borderColor: "rgba(255,255,255,.3)",
         display: "flex",
         borderRadius: "25px",
         width: "max-content",
-        height: 50,
+        height: 35,
         justifyContent: "space-between",
         alignItems: "center",
         gap: 5,
-        p: 7,
+        py: 3,
         m: 5,
       }}
     >
       <IconButton
+        sx={{
+          width: "100%",
+          borderRadius: "50%",
+          minHeight: 35,
+          minWidth: 35,
+          aspectRatio: 1,
+          bgcolor: isMobileMenuOpen
+            ? "rgba(255,255,255,.5)!important"
+            : "inherit",
+        }}
         disableRipple
         onClick={() => {
-          setActiveMenu("settings");
+          toggleMobileMenuState();
         }}
       >
-        <Settings />
+        {isMobileMenuOpen ? <MenuOpen /> : <Menu />}
       </IconButton>
       <IconButton
+        sx={{
+          width: "100%",
+          borderRadius: "50%",
+          minHeight: 35,
+          minWidth: 35,
+          aspectRatio: 1,
+          bgcolor: isMobileMenuOpen
+            ? "inherit"
+            : "rgba(255,255,255,.5)!important",
+        }}
         disableRipple
         onClick={() => {
-          setActiveMenu("contents");
+          toggleMobileMenuState();
         }}
       >
-        <List />
+        <AutoStories />
       </IconButton>
     </Box>
   );

@@ -7,12 +7,14 @@ interface ReaderState {
   fontSize: number;
   activeMenu: ReaderMenu;
   isMenuVisible: boolean;
+  isMobileMenuOpen: boolean;
 }
 
 interface ReaderAction {
   setFontSize: (fontSize: number) => void;
   setActiveMenu: (activeMenu: ReaderMenu) => void;
   toggleMenuVisibility: () => void;
+  toggleMobileMenuState: () => void;
 }
 
 const useReaderStore = create(
@@ -21,6 +23,7 @@ const useReaderStore = create(
       fontSize: 14,
       activeMenu: "contents",
       isMenuVisible: false,
+      isMobileMenuOpen:false,
       setFontSize: (fontSize) => {
         set(() => ({ fontSize: fontSize }));
       },
@@ -29,6 +32,9 @@ const useReaderStore = create(
       },
       toggleMenuVisibility: () => {
         set(() => ({ isMenuVisible: !get().isMenuVisible }));
+      },
+      toggleMobileMenuState: () => {
+        set(() => ({ isMobileMenuOpen: !get().isMobileMenuOpen }));
       },
     }),
     {
