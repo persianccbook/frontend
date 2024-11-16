@@ -11,7 +11,6 @@ interface Props {
 const MarkdownRenderer = ({ markdown }: Props) => {
   return (
     <Markdown
-      children={markdown}
       remarkPlugins={[remarkGfm]}
       components={{
         code: function code(props) {
@@ -21,10 +20,11 @@ const MarkdownRenderer = ({ markdown }: Props) => {
             <SyntaxHighlighter
               {...omit(rest, "ref")}
               PreTag="div"
-              children={String(children).replace(/\n$/, "")}
               language={match[1]}
               style={atomDark}
-            />
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
           ) : (
             <code {...rest} className={className}>
               {children}
@@ -32,7 +32,9 @@ const MarkdownRenderer = ({ markdown }: Props) => {
           );
         },
       }}
-    />
+    >
+      {markdown}
+    </Markdown>
   );
 };
 
