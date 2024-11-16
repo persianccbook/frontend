@@ -165,7 +165,7 @@ const NavBar = () => {
         onClick={
           isAuthenticated
             ? handleProfileMenuOpen
-            : () => router.push("/auth/login")
+            : () => router.push("/login")
         }
       >
         <IconButton
@@ -266,7 +266,7 @@ const NavBar = () => {
               onClick={
                 isAuthenticated
                   ? handleProfileMenuOpen
-                  : () => router.push("/auth/login")
+                  : () => router.push("/login")
               }
             >
               {isAuthenticated ? (

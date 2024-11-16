@@ -90,7 +90,7 @@ const LoginPage = () => {
             }}
           >
             <Typography>گذرواژه:</Typography>
-            <NextLink href="/auth/reset-password" passHref>
+            <NextLink href="/reset-password" passHref>
               <Link component="button" variant="caption" underline="none">
                 گذرواژه خود را فراموش کرده اید؟
               </Link>
@@ -147,7 +147,7 @@ const LoginPage = () => {
             }}
           >
             <Typography variant="caption">حساب کاربری ندارید؟</Typography>
-            <NextLink href="/auth/register" passHref>
+            <NextLink href="/register" passHref>
               <Link component="button" variant="caption" underline="none">
                 ثبت نام کنید
               </Link>

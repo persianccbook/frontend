@@ -224,7 +224,7 @@ const RegisterPage = () => {
             }}
           >
             <Typography variant="caption">حساب کاربری دارید؟</Typography>
-            <NextLink href="/auth/login" passHref>
+            <NextLink href="/login" passHref>
               <Link component="button" variant="caption" underline="none">
                 وارد شوید
               </Link>
