@@ -1,15 +1,16 @@
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import reading from "../../public/reading.svg";
 import WordCycle from "../components/WordCycle";
 import LevitateImage from "../components/LevitateImage";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const IntroductionSegment = () => {
-    const theme = useTheme();
+  const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
   const isXlUp = useMediaQuery(theme.breakpoints.up("xl"));
+  const router = useRouter();
 
   return (
     <Box
@@ -45,9 +46,9 @@ const IntroductionSegment = () => {
         <Typography
           variant={isXlUp ? "h4" : isLgUp ? "h5" : isMdUp ? "h6" : "body2"}
         >
-          این کتابخانه مجموعه‌ای از کتاب‌ها را که تحت مجوز کریتیو کامنز است، به
-          شما ارائه خواهد داد. هدف ما دسترسی آسان و آزاد به منابع علمی و فرهنگی
-          برای همگان است.
+          این <Link href={'/books'} underline="none" sx={{color:'secondary.main'}}>کتابخانه</Link> مجموعه‌ای از کتاب‌ها را که تحت مجوز کریتیو کامنز
+          است، به شما ارائه خواهد داد. هدف ما دسترسی آسان و آزاد به منابع علمی و
+          فرهنگی برای همگان است.
         </Typography>
       </Box>
       <Box
@@ -62,17 +63,17 @@ const IntroductionSegment = () => {
         }}
       >
         <LevitateImage>
-          <Link href={"/books"}>
           <Image
+            onClick={() => router.push("/books")}
             src={reading}
             alt="logo"
             width={isXlUp ? 800 : isLgUp ? 500 : isMdUp ? 400 : 300}
-            style={{ flex: 1, padding: 5, margin: 50 }}
-          /></Link>
+            style={{ flex: 1, padding: 5, margin: 50, cursor: "pointer" }}
+          />
         </LevitateImage>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default IntroductionSegment
+export default IntroductionSegment;
