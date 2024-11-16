@@ -45,9 +45,8 @@ const BookPage = ({ params: { bookId } }: Props) => {
             width={200}
             style={{ marginBottom: 10, borderRadius: "10px" }}
           />
-          {/* TODO: add redirect to reader */}
           <Button
-            onClick={() => router.push("/")}
+            onClick={() => router.push(`/reader/book/${book?.id}/chapter/1/page/1`)}
             disabled={!isAuthenticated}
             variant="contained"
             color="secondary"
