@@ -1,9 +1,17 @@
-import { Box, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import bookCoverGreen from "../../public/book-cover-green.jpg";
 import { useAnimate } from "framer-motion";
 import useInterval from "../hooks/useInterval";
 import useTopBooks from "../hooks/useTopBooks";
+import { useRouter } from "next/navigation";
 
 // TODO: use nextjs image component and optimize images
 const BookSegment = () => {
@@ -13,6 +21,7 @@ const BookSegment = () => {
   const [coverImageScope, coverImageAnimate] = useAnimate();
   const [textScope, textAnimate] = useAnimate();
   const { data, error } = useTopBooks();
+  const router = useRouter();
 
   const books = data?.data.payload.books;
   const booksCount = books?.length ? books?.length - 1 : 3;
@@ -61,7 +70,6 @@ const BookSegment = () => {
   };
 
   if (error) return <Typography>{error.message}</Typography>;
-
 
   return (
     <Paper
@@ -210,10 +218,15 @@ const BookSegment = () => {
                 30
               )}
         </Typography>
-        <Typography variant="caption">
+        <Typography variant="caption" display={"block"}>
           منتشر شده در{" "}
           {books && books[index].published ? books[index].published : ""}
         </Typography>
+        <Box sx={{ display: "flex", justifyContent: "end" }}>
+          <Button variant="outlined" onClick={() => router.push(`/books/${books && books[index].id}`)}>
+            رفتن به صفحه کتاب
+          </Button>
+        </Box>
       </Paper>
     </Paper>
   );
