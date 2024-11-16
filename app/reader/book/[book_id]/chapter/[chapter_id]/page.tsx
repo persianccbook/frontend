@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-const page = ({ params: { book_id, chapter_id } }: Props) => {
+const ReaderBookChapterPage = ({ params: { book_id, chapter_id } }: Props) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const page = ({ params: { book_id, chapter_id } }: Props) => {
   return <div>Loading...</div>;
 };
 
-export default page;
+export default ReaderBookChapterPage;
