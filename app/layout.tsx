@@ -6,6 +6,7 @@ import GoogleAnalyticsScript from "./GoogleAnalyticsScript";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { ReactQueryClientProvider } from "./components/ReactQueryClientProvider";
+import GlobalAnnouncement from "./components/GlobalAnnouncement";
 
 export const metadata: Metadata = {
   title: "PersianCCBook",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <ReactQueryClientProvider>
           <PaletteProvider>
             <CssBaseline />
+            <GlobalAnnouncement/>
             <NavBar />
             <main id="root">{children}</main>
             <Footer />
