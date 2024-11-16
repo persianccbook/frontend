@@ -25,16 +25,16 @@ const Reader = ({ params: { book_id, chapter_id, page_id } }: Props) => {
     book_id,
     chapter_id
   );
+  const { isMobileMenuOpen } = useReaderStore();
   if (bookErr || chaptersErr || pagesErr)
     return (
-  <Typography>
+      <Typography>
         {bookErr && bookErr.message}
         {chaptersErr && chaptersErr.message}
         {pagesErr && pagesErr.message}
       </Typography>
     );
-    const {isMobileMenuOpen}=useReaderStore()
-    const chapters = chaptersData?.data.payload.chapters;
+  const chapters = chaptersData?.data.payload.chapters;
   const chapterTitle =
     chapters && chapters[parseInt(chapter_id) - 1]
       ? chapters[parseInt(chapter_id) - 1].title
@@ -45,10 +45,11 @@ const Reader = ({ params: { book_id, chapter_id, page_id } }: Props) => {
       ? pages[parseInt(page_id) - 1].title
       : "";
 
-
   var contents =
-    pages && pages[parseInt(page_id)-1] && pages[parseInt(page_id)-1].content
-      ? pages[parseInt(page_id)-1].content
+    pages &&
+    pages[parseInt(page_id) - 1] &&
+    pages[parseInt(page_id) - 1].content
+      ? pages[parseInt(page_id) - 1].content
       : "";
   contents = contents as string;
 
@@ -81,16 +82,18 @@ const Reader = ({ params: { book_id, chapter_id, page_id } }: Props) => {
           >
             {bookData?.data.payload.title}/{chapterTitle}/{pageTitle}
           </Paper>
-          {(isSmUp || isMobileMenuOpen) && chapters && <ReaderSideBar chapters={chapters} />}
+          {(isSmUp || isMobileMenuOpen) && chapters && (
+            <ReaderSideBar chapters={chapters} />
+          )}
         </Box>
         <Paper
           sx={{
-            display:isSmUp?"inline":isMobileMenuOpen?"none":"inline",
+            display: isSmUp ? "inline" : isMobileMenuOpen ? "none" : "inline",
             p: 15,
             fontSize: fontSize,
             borderRadius: "15px",
             maxWidth: "90vw",
-            width:"100%",
+            width: "100%",
             mx: "auto",
             overflowX: "hidden",
             overflowY: "auto",
