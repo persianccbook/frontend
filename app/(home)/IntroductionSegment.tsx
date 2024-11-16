@@ -1,4 +1,4 @@
-import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import reading from "../../public/reading.svg";
 import WordCycle from "../components/WordCycle";
@@ -46,10 +46,11 @@ const IntroductionSegment = () => {
         <Typography
           variant={isXlUp ? "h4" : isLgUp ? "h5" : isMdUp ? "h6" : "body2"}
         >
-          این <Link href={'/books'} underline="none" sx={{color:'secondary.main'}}>کتابخانه</Link> مجموعه‌ای از کتاب‌ها را که تحت مجوز کریتیو کامنز
+          این کتابخانه مجموعه‌ای از کتاب‌ها را که تحت مجوز کریتیو کامنز
           است، به شما ارائه خواهد داد. هدف ما دسترسی آسان و آزاد به منابع علمی و
           فرهنگی برای همگان است.
         </Typography>
+        <Button variant="contained" sx={{alignSelf:'end',mt:5}} href={'/books'}>شروع به خواندن کنید</Button>
       </Box>
       <Box
         flex={1}
