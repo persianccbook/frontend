@@ -12,6 +12,7 @@ import { useAnimate } from "framer-motion";
 import useInterval from "../hooks/useInterval";
 import useTopBooks from "../hooks/useTopBooks";
 import { useRouter } from "next/navigation";
+import AuthorTag from "../books/AuthorTag";
 
 // TODO: use nextjs image component and optimize images
 const BookSegment = () => {
@@ -203,7 +204,16 @@ const BookSegment = () => {
       >
         <Typography variant="h3">{books ? books[index].title : ""}</Typography>
         <Typography variant="h4">
-          نوشته: {books ? books[index].authors : ""}
+          نوشته: {books ? books[index].authors.map((author, authorIndex) => {
+                return books[index].authors.length === authorIndex + 1 ? (
+                  <AuthorTag authorId={author.toString()} />
+                ) : (
+                  <>
+                    <AuthorTag authorId={author.toString()} />
+                    <>,</>
+                  </>
+                );
+              }): ""}
         </Typography>
         <Typography variant="body1">
           {isMdUp
