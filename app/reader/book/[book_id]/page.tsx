@@ -13,7 +13,7 @@ const ReaderBookPage = ({ params: { book_id } }: Props) => {
 
   useEffect(() => {
     router.push(`/reader/book/${book_id}/chapter/1/page/1`);
-  }, []);
+  });
 
   return <div>Loading...</div>;
 };
