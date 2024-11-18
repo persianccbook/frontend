@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 interface QandA {
@@ -75,6 +75,15 @@ const FAQPAge = () => {
   ];
 
   return (
+    <Box
+      sx={{
+        m: "auto",
+        p: 10,
+        maxWidth: { s: 345, md: 700, lg: 1200 },
+      }}
+    ><Typography variant="h3" sx={{ mb: 5 }}>
+        سوالات متداول
+      </Typography>
     <Paper
       sx={{
         mx: "auto",
@@ -84,9 +93,7 @@ const FAQPAge = () => {
         maxWidth: { s: 345, md: 700, lg: 1200 },
       }}
     >
-      <Typography variant="h3" sx={{ mb: 5 }}>
-        سوالات متداول
-      </Typography>
+      
       <Typography variant="body2" sx={{mb:10}}>{startParagraph}</Typography>
       {faq.map((o, index) => (
         <Paper elevation={10} key={index} sx={{ mb: 5, p: 5 ,borderRadius:3 }}>
@@ -108,7 +115,7 @@ const FAQPAge = () => {
           )}
         </Paper>
       ))}
-    </Paper>
+    </Paper></Box>
   );
 };
 
