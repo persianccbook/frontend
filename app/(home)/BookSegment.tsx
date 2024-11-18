@@ -24,12 +24,12 @@ const BookSegment = () => {
   const router = useRouter();
 
   const books = data?.data.payload.books;
-  const booksCount = books?.length ? books?.length - 1 : 3;
+  const booksCount = books?.length ? books?.length: 3;
 
   useInterval(
     () => {
       console.log("interval");
-      index === booksCount ? setIndex(0) : setIndex(index + 1);
+      index === booksCount -1 ? setIndex(0) : setIndex(index + 1);
     },
     5000,
     [index]
@@ -70,6 +70,8 @@ const BookSegment = () => {
   };
 
   if (error) return <Typography>{error.message}</Typography>;
+
+  if (booksCount == 0) return <div></div>
 
   return (
     <Paper
