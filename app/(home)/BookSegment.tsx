@@ -25,31 +25,34 @@ const BookSegment = () => {
   const router = useRouter();
 
   const books = data?.data.payload.books;
-  const booksCount = books?.length ? books?.length: 3;
+  const booksCount = books?.length ? books?.length : 3;
 
   useInterval(
     () => {
-      console.log("interval");
-      index === booksCount -1 ? setIndex(0) : setIndex(index + 1);
+      // console.log("interval",booksCount);
+      if (booksCount && booksCount > 1)
+        index == booksCount - 1 ? setIndex(0) : setIndex(index + 1);
     },
     5000,
     [index]
   );
 
   useEffect(() => {
-    console.log(index);
-    coverImageAnimate(
-      coverImageScope.current,
-      {
-        scale: [0.2, 1],
-      },
-      { duration: 1, ease: "easeInOut" }
-    );
-    textAnimate(
-      textScope.current,
-      { y: [10, 0], opacity: [0, 1] },
-      { duration: 1, ease: "easeInOut" }
-    );
+    // console.log('index',index);
+    if (booksCount > 1) {
+      coverImageAnimate(
+        coverImageScope.current,
+        {
+          scale: [0.2, 1],
+        },
+        { duration: 1, ease: "easeInOut" }
+      );
+      textAnimate(
+        textScope.current,
+        { y: [10, 0], opacity: [0, 1] },
+        { duration: 1, ease: "easeInOut" }
+      );
+    }
   }, [index, coverImageScope, coverImageAnimate, textScope, textAnimate]);
 
   const truncateString = (str: string, maxLength: number): string => {
@@ -72,7 +75,125 @@ const BookSegment = () => {
 
   if (error) return <Typography>{error.message}</Typography>;
 
-  if (booksCount == 0) return <div></div>
+  if (booksCount == 0) return <div></div>;
+  if (booksCount == 1) {
+    const book = books?books[0]:undefined
+    return (
+      <Paper
+        sx={{
+          display: "flex",
+          alignItems: "flex-start",
+          mb: 10,
+          p: 15,
+          flexDirection: isMdUp ? "row" : "column",
+          gap: 5,
+        }}
+        elevation={1}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "stretch",
+            flexDirection: isMdUp ? "row" : "column",
+            width: isMdUp ? "30%" : "100%",
+            maxHeight: isMdUp ? "50vh" : "auto",
+            gap: 5,
+          }}
+        >
+          <Box sx={{ width: isMdUp ? "80%" : "100%", flexGrow: 1 }}>
+            <img
+              ref={coverImageScope}
+              src={
+                book
+                  ? book.cover_image
+                    ? book.cover_image
+                    : bookCoverGreen.src
+                  : bookCoverGreen.src
+              }
+              alt={book ? book.title : ""}
+              key={index}
+              width={500}
+              height={500}
+              style={{
+                objectFit: "contain",
+                height: isMdUp ? "100%" : "auto",
+                width: isMdUp ? "auto" : "100%",
+                transformOrigin: isMdUp
+                  ? index === 0
+                    ? "top right"
+                    : index === 1
+                    ? "right"
+                    : "bottom right"
+                  : index === 0
+                  ? "bottom right"
+                  : index === 1
+                  ? "bottom"
+                  : "bottom left",
+              }}
+            />
+          </Box>
+          
+        </Box>
+        <Paper
+          ref={textScope}
+          elevation={0}
+          sx={{
+            width: isMdUp ? "70%" : "100%",
+            p: 15,
+            m: isMdUp ? "auto" : 0,
+            height: isMdUp ? "auto" : "100%",
+            maxHeight: isMdUp ? "50vh" : "auto",
+          }}
+        >
+          <Typography variant="h3">
+            {book ? book.title : ""}
+          </Typography>
+          <Typography variant="h4">
+            نوشته:{" "}
+            {book
+              ? book.authors.map((author, authorIndex) => {
+                  return book.authors.length === authorIndex + 1 ? (
+                    <AuthorTag key={authorIndex} authorId={author.toString()} />
+                  ) : (
+                    <>
+                      <AuthorTag key={authorIndex} authorId={author.toString()} />
+                      <>,</>
+                    </>
+                  );
+                })
+              : ""}
+          </Typography>
+          <Typography variant="body1">
+            {isMdUp
+              ? truncateString(
+                  book && book.description
+                    ? book.description
+                    : "",
+                  50
+                )
+              : truncateString(
+                  book && book.description
+                    ? book.description
+                    : "",
+                  30
+                )}
+          </Typography>
+          <Typography variant="caption" display={"block"}>
+            منتشر شده در{" "}
+            {book && book.published ? book.published : ""}
+          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "end" }}>
+            <Button
+              variant="outlined"
+              onClick={() => router.push(`/books/${book && book.id}`)}
+            >
+              رفتن به صفحه کتاب
+            </Button>
+          </Box>
+        </Paper>
+      </Paper>
+    );
+  }
 
   return (
     <Paper
@@ -204,7 +325,9 @@ const BookSegment = () => {
       >
         <Typography variant="h3">{books ? books[index].title : ""}</Typography>
         <Typography variant="h4">
-          نوشته: {books ? books[index].authors.map((author, authorIndex) => {
+          نوشته:{" "}
+          {books
+            ? books[index].authors.map((author, authorIndex) => {
                 return books[index].authors.length === authorIndex + 1 ? (
                   <AuthorTag authorId={author.toString()} />
                 ) : (
@@ -213,7 +336,8 @@ const BookSegment = () => {
                     <>,</>
                   </>
                 );
-              }): ""}
+              })
+            : ""}
         </Typography>
         <Typography variant="body1">
           {isMdUp
@@ -235,7 +359,10 @@ const BookSegment = () => {
           {books && books[index].published ? books[index].published : ""}
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "end" }}>
-          <Button variant="outlined" onClick={() => router.push(`/books/${books && books[index].id}`)}>
+          <Button
+            variant="outlined"
+            onClick={() => router.push(`/books/${books && books[index].id}`)}
+          >
             رفتن به صفحه کتاب
           </Button>
         </Box>
