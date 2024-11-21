@@ -329,10 +329,10 @@ const BookSegment = () => {
           {books
             ? books[index].authors.map((author, authorIndex) => {
                 return books[index].authors.length === authorIndex + 1 ? (
-                  <AuthorTag authorId={author.toString()} />
+                  <AuthorTag key={authorIndex} authorId={author.toString()} />
                 ) : (
                   <>
-                    <AuthorTag authorId={author.toString()} />
+                    <AuthorTag key={authorIndex} authorId={author.toString()} />
                     <>,</>
                   </>
                 );
