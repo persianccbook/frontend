@@ -7,10 +7,11 @@ import useAnnouncement from "../hooks/useAnnouncement";
 
 const GlobalAnnouncement = () => {
   const [isClosed, setClosed] = useState(false);
-  const { data, error } = useAnnouncement();
+  const { data, error, isLoading } = useAnnouncement();
 
-    const announcement = data?.data.payload
+  const announcement = data?.data.payload;
 
+  if (isLoading) return <div></div>;
   if (error) return <div>{error.message}</div>;
 
   return (
