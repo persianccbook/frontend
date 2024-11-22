@@ -12,4 +12,4 @@ const useAnnouncement = ()=>{
         staleTime: 1 * 60 * 1000, //1h
     });
 }
-export default useAnnouncement;  
+export default useAnnouncement;
