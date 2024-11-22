@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export type PageSchema = {
+    content?: string;
     chapter: number;
-    content?: (string | null);
     title: string;
     page_number: number;
     created: string;
