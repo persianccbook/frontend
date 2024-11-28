@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -11,6 +10,10 @@ import {
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormLayout from "../../components/FormLayout";
+import { ContactUsSchema, InfoService } from "../../../openapi";
+import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z
@@ -23,6 +26,10 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const ContactUspage = () => {
+  const [res, setRes] = useState({} as ContactUsSchema);
+  const [error, setError] = useState({} as AxiosError);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -30,22 +37,51 @@ const ContactUspage = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onChange" });
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    console.log('contact us')
+    try {
+      const response = await InfoService.apiInfoApiContactUs({
+        email: data.email,
+        message: data.message,
+      });
+      setRes(response);
+    } catch (error: any) {
+      setError(error);
+    }
   };
+
+  useEffect(() => {
+    if (res.status === "success") {
+      const timeoutId = setTimeout(() => {
+        router.push("/");
+      }, 5000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [res, router]);
 
   return (
     <FormLayout>
       <Typography variant="h4" sx={{ mb: 15 }}>
         ارتباط با ما{" "}
       </Typography>
-      {/* {apiError && (
+      {error.message && (
         <Typography variant="caption" color="error">
-          ایمیل یا گذرواژه وارد شده اشتباه است.
+          {error.message}
         </Typography>
-      )} */}
+      )}
+      {res.status === "error" && (
+        <Typography variant="caption" color="error">
+          {res.data.message}
+        </Typography>
+      )}
+      {res.status === "success" && (
+        <Typography display="block" variant="caption" color="primary">
+          پیام شما با موفقیت ثبت شد
+        </Typography>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl sx={{ minWidth: 290 }}>
-          <FormLabel sx={{ mb: 3 }}>ایمیل:</FormLabel>    
+          <FormLabel sx={{ mb: 3 }}>ایمیل:</FormLabel>
           <TextField
             {...register("email")}
             type="text"
@@ -62,8 +98,8 @@ const ContactUspage = () => {
           <FormLabel sx={{ mb: 3 }}>پیام:</FormLabel>
           <TextField
             {...register("message")}
-            multiline={true }
-            rows={4}    
+            multiline={true}
+            rows={4}
             type="text"
             dir="rtl"
             placeholder="پیام خود را بنویسید."
